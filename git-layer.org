@@ -9,5 +9,25 @@
    当前文件变成unstage
 ** U
    所有文件变成Unstage
-
+** cc (git commit)
+   在管理窗口按下cc
+** P u
+   在status buffer上，按下P m
+** git log 的替代方法
+   在status buffer上按下||
+** git diff
+   对过去的commit进行diff
+   选中一批，按下d r
+** 从远程同步
+   git fetch --> f u
+   git pull --> F u
+** branch
+*** 查看本地branch
+    y
+*** 切换branch
+    在status buffer上按b进入branch管理界面，再按b进行切换
+    创建新的branch 按c
+*** merge
+    - 切换到master branch
+    - 按下m m 选择develop branch
 
