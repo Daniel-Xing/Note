@@ -30,4 +30,3 @@
 *** merge
     - 切换到master branch
     - 按下m m 选择develop branch
-
