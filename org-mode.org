@@ -1,0 +1,24 @@
+* org-mode
+** 表格基本操作
+
+** with-source-block
+   #+NAME: citas-data
+   | Sede  | Max cites | H-index |
+   |-------+-----------+---------|
+   | Chile |    257.72 |   21.39 |
+   | Leeds |    165.77 |   19.68 |
+
+#+BEGIN_SRC python :var tbl_data=citas-data :results output
+print("hello")
+#+END_SRC
+
+#+RESULTS:
+: hello
+
+** agenda
+C-c [   将文件加入到全局的agenda中
+
+C-c a m 查看全局事项 Todo Done等等
+
+C-c a s 全局text搜索
+
