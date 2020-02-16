@@ -22,3 +22,21 @@ C-c a m 查看全局事项 Todo Done等等
 
 C-c a s 全局text搜索
 
+
+** 导出为latex
+*** 步骤
+- 在Linux下安装texlive
+- 在配置文件中添加latex层
+*** command
+- C-c C-e  打开导出面板
+*** 一些存在的问题
+由于可能需要导入一些没有预装的.sty文件，上 https://ctan.org/ 搜索，下载下来，放在/usr/share/texlive/texmf-dist/tex/latex/ 目录下，执行
+#+BEGIN_SRC shell 
+sudo texhash
+#+END_SRC
+对于没有.sty文件的，在文件下执行
+#+BEGIN_SRC 
+latex *.dtx
+#+end_src
+自动生成.sty
+
