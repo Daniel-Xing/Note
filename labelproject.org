@@ -39,13 +39,14 @@
 ** docker inspect --format='{{.NetworkSettings.IPAddress}}' <container name>
    查看某个容器的ip地址
 
-* Bugs [3/8]
+* Bugs [4/8]
 ** FIXED 增加标注矩形和多边形
    CLOSED: [2020-02-10 Mon 14:31]
    - CLOSING NOTE [2020-02-10 Mon 14:31] \\
      在原来的属性style中的display中，更改一下布尔表达式即可
 ** BUG 增加在审查过程中的删除操作
-** BUG 下载时也下载标签描述
+** FIXED 下载时也下载标签描述
+   在下载时返回标签描述
 ** BUG session保持时间存在问题
 ** BUG 在下载项中添加多选操作
 ** FIXED 在页面最后一张上点击下一个，会出现跳转到页面第一张的情况
