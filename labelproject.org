@@ -1,5 +1,38 @@
 * 上传文件到服务器
-sudo docker cp <image_folder_path> labelproject:/home/kiritoghy/labelprojectdata/image/
+** recommended
+   将文件夹复制到/labelproject/kiritoghy/labelprojectdata/image/ 下
+** temporary( will be fixed after updating)
+  sudo docker cp <image_folder_path> labelproject:/home/kiritoghy/labelprojectdata/image/
+* Bugs [7/7]
+** FIXED 增加标注矩形和多边形
+   CLOSED: [2020-02-10 Mon 14:31]
+   - CLOSING NOTE [2020-02-10 Mon 14:31] \\
+     在原来的属性style中的display中，更改一下布尔表达式即可
+** FIXED 增加在审查过程中的删除操作
+   CLOSED: [2020-02-20 Thu 20:04]
+   - CLOSING NOTE [2020-02-20 Thu 20:04] \\
+     需要管理员权限
+** FIXED 下载时也下载标签描述
+   在下载时返回标签描述
+** FIXED 在下载项中添加多选操作
+   CLOSED: [2020-02-20 Thu 20:04]
+   - CLOSING NOTE [2020-02-20 Thu 20:04]
+** FIXED 在页面最后一张上点击下一个，会出现跳转到页面第一张的情况
+   CLOSED: [2020-02-10 Mon 14:36]
+   - CLOSING NOTE [2020-02-10 Mon 14:36] \\
+     原来的代码中的逻辑有问题。
+     
+     在判断边界条件时，如果是最后一张，需要将page+1，并且*获取新的imagelist来替换原来的*，然后才能正确。
+     
+     同理，*前一张*这一操作也是需要更新imagelist在边界条件下。
+** FIXED 审核完成后在审核页面添加标识
+   CLOSED: [2020-02-10 Mon 19:20]
+   - CLOSING NOTE [2020-02-10 Mon 19:20] \\
+     添加一个新的组件，并使用vi-if 的方式来根据当前显示的图片的userconfirmed属性，选择显示已审核还是未审核。
+** FIXED 增加筛选未完成、未标注图片的功能
+   CLOSED: [2020-02-20 Thu 20:01]
+   - CLOSING NOTE [2020-02-20 Thu 20:01] \\
+     增加了筛选未标注图片的功能，以一个小按钮的形式标呈现在最上方
 * config
 ** mysql
 *** command
@@ -41,26 +74,3 @@ sudo docker cp <image_folder_path> labelproject:/home/kiritoghy/labelprojectdata
 ** docker inspect --format='{{.NetworkSettings.IPAddress}}' <container name>
    查看某个容器的ip地址
 
-* Bugs [4/8]
-** FIXED 增加标注矩形和多边形
-   CLOSED: [2020-02-10 Mon 14:31]
-   - CLOSING NOTE [2020-02-10 Mon 14:31] \\
-     在原来的属性style中的display中，更改一下布尔表达式即可
-** BUG 增加在审查过程中的删除操作
-** FIXED 下载时也下载标签描述
-   在下载时返回标签描述
-** BUG session保持时间存在问题
-** BUG 在下载项中添加多选操作
-** FIXED 在页面最后一张上点击下一个，会出现跳转到页面第一张的情况
-   CLOSED: [2020-02-10 Mon 14:36]
-   - CLOSING NOTE [2020-02-10 Mon 14:36] \\
-     原来的代码中的逻辑有问题。
-     
-     在判断边界条件时，如果是最后一张，需要将page+1，并且*获取新的imagelist来替换原来的*，然后才能正确。
-     
-     同理，*前一张*这一操作也是需要更新imagelist在边界条件下。
-** FIXED 审核完成后在审核页面添加标识
-   CLOSED: [2020-02-10 Mon 19:20]
-   - CLOSING NOTE [2020-02-10 Mon 19:20] \\
-     添加一个新的组件，并使用vi-if 的方式来根据当前显示的图片的userconfirmed属性，选择显示已审核还是未审核。
-** BUG 增加筛选未完成、未标注图片的功能
