@@ -1,56 +1,56 @@
-* 上传文件到服务器
+===== 上传文件到服务器=====
 sudo docker cp <image_folder_path> labelproject:/home/kiritoghy/labelprojectdata/image/
-* config
-** mysql
-*** command
+===== config=====
+==== mysql====
+=== command===
      docker run -p 3307:3306 -e MYSQL_ROOT_PASSWORD=123456 -v /home/data/mysql/data:/var/lib/mysql:rw --name mysql8 --restart=always -d mysql:latest
-**** 说明
+== 说明==
      端口映射:3307 : 3306
      数据库账号密码: root 123456
      数据库文件挂在路径: /home/data/mysql/data --> /var/lib/mysql
      如果容器挂掉, 那么只要将文件再次挂在在这个目录下面即可.
 
-** redis
-*** command
+==== redis====
+=== command===
     docker run -p 6379:6379 --name redis -v /mydata/redis/data:/data -d redis:3.2 redis-server
-**** 说明
+== 说明==
      端口映射:6379 : 6379
      不需要挂载卷在主机目录下面, 因为只做缓存的作用
 
-** label project -- springboot application
-*** command
+==== label project -- springboot application====
+=== command===
     docker run --name labelproject -p 8887:8887 -v /labelproject:/root -d labelproject
-**** 说明
+== 说明==
      端口映射: 8887:8887
      volume: /labelproject --> /root
      具体的数据文件存储在/home/kiritoghy/labelprojectdata/ 下, 所以在每次手动导入数据之后, 需要将文件cp 到/root 下进行备份.
 
-** vuejs -- 前端
-*** command
+==== vuejs -- 前端====
+=== command===
     npm run dev
-**** 说明
+== 说明==
      未使用容器进行部署,主要是不熟悉. 部署的时候注意把ip换成容器的ip.
      
-* 常用的命令
-** docker exec -it <container name> <command>
+===== 常用的命令=====
+==== docker exec -it <container name> <command>====
    执行容器指定目录下的命令, 并跳转到容器的命令行
 
-** docker cp <本机文件或者文件夹> <container name:对应容器下的目录>
+==== docker cp <本机文件或者文件夹> <container name:对应容器下的目录>====
    本机文件复制到容器内
 
-** docker inspect --format='{{.NetworkSettings.IPAddress}}' <container name>
+==== docker inspect --format='{{.NetworkSettings.IPAddress}}' <container name>====
    查看某个容器的ip地址
 
-* Bugs [3/8]
-** FIXED 增加标注矩形和多边形
+===== Bugs [3/8]=====
+==== FIXED 增加标注矩形和多边形====
    CLOSED: [2020-02-10 Mon 14:31]
    - CLOSING NOTE [2020-02-10 Mon 14:31] \\
      在原来的属性style中的display中，更改一下布尔表达式即可
-** BUG 增加在审查过程中的删除操作
-** BUG 下载时也下载标签描述
-** BUG session保持时间存在问题
-** BUG 在下载项中添加多选操作
-** FIXED 在页面最后一张上点击下一个，会出现跳转到页面第一张的情况
+==== BUG 增加在审查过程中的删除操作====
+==== BUG 下载时也下载标签描述====
+==== BUG session保持时间存在问题====
+==== BUG 在下载项中添加多选操作====
+==== FIXED 在页面最后一张上点击下一个，会出现跳转到页面第一张的情况====
    CLOSED: [2020-02-10 Mon 14:36]
    - CLOSING NOTE [2020-02-10 Mon 14:36] \\
      原来的代码中的逻辑有问题。
@@ -58,8 +58,8 @@ sudo docker cp <image_folder_path> labelproject:/home/kiritoghy/labelprojectdata
      在判断边界条件时，如果是最后一张，需要将page+1，并且*获取新的imagelist来替换原来的*，然后才能正确。
      
      同理，*前一张*这一操作也是需要更新imagelist在边界条件下。
-** FIXED 审核完成后在审核页面添加标识
+==== FIXED 审核完成后在审核页面添加标识====
    CLOSED: [2020-02-10 Mon 19:20]
    - CLOSING NOTE [2020-02-10 Mon 19:20] \\
      添加一个新的组件，并使用vi-if 的方式来根据当前显示的图片的userconfirmed属性，选择显示已审核还是未审核。
-** BUG 增加筛选未完成、未标注图片的功能
+==== BUG 增加筛选未完成、未标注图片的功能====

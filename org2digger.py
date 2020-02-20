@@ -2,9 +2,9 @@ import argparse
 
 parser=argparse.ArgumentParser()
 
-parser.add_argument("--input",type=str,default="None",
+parser.add_argument("--input",type=str,default="/root/Note/labelproject.org",
                     help="")
-parser.add_argument("--output",type=str,default="None",
+parser.add_argument("--output",type=str,default="/root/Note/labelproject",
                     help="")
 
 args=parser.parse_args()
