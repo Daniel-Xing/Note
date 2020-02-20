@@ -2,35 +2,35 @@
 ** command
 *** 更换国内源
 **** 清华
-     deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
-     deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
-     deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
-     deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
-     deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
-     deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
-     deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
-     deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
-     deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
-     deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
 **** 备份并改源
-     sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
-     sudo vim /etc/apt/sources.list
-     sudo apt-get update
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+sudo vim /etc/apt/sources.list
+sudo apt-get update
 **** 安装桌面环境  
 ***** xorg 基础环境
-      sudo apt-get install xorg
+ sudo apt-get install xorg
 ***** xfce
-      sudo apt-get install  xfce4
+ sudo apt-get install  xfce4
 ***** xrdp 远程桌面服务端
-      sudo apt-get install xrdp
+ sudo apt-get install xrdp
 ***** 配置环境
 ****** 备份
-      sudo cp /etc/xrdp/xrdp.ini /etc/xrdp/xrdp.ini.bak
+ sudo cp /etc/xrdp/xrdp.ini /etc/xrdp/xrdp.ini.bak
 ****** 修改
-      sudo vim /etc/xrdp/xrdp.ini
+ sudo vim /etc/xrdp/xrdp.ini
 ****** 将会话环境写入到默认的会话环境配置文件中
-       sudo echo xfce4-session > ~/.xsession
+  sudo echo xfce4-session > ~/.xsession
 ****** 重新启动服务
-       sudo /etc/init.d/xrdp restart 
+  sudo /etc/init.d/xrdp restart 
 **** 查看IP
-     ipconfig
+ipconfig
