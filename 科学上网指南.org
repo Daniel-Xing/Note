@@ -1,0 +1,23 @@
+* 科学上网指南
+1. 使用node安装ssr-helper
+2. 安装libsodium库文件(注意是最新版)以使用chacha20加密
+3. 运行脚本添加URI代理
+4. 测试运行
+
+** 添加git代理
+#+BEGIN_SRC shell
+git config --global http.proxy 'socks5://127.0.0.1:1080'
+git config --global https.proxy 'socks5://127.0.0.1:1080'
+#+END_SRC
+
+** 使用proxychain4
+#+BEGIN_SRC shell
+tar -zxvf proxychains-4.3.0.tar.gz 
+cd proxychains-4.3.0/
+./configure 
+make && make install
+cp proxychains-4.3.0/src/proxychains.conf ./  #HOME下
+vim proxychains.conf 　　　　　#修改为　socks5 ip port 注意如果写多个协议会在chain 上多加一层
+proxychains4　curl www.google.com　#测试
+#+END_SRC
+目前支持wget crul，不支持 telent
