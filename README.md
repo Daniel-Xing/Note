@@ -16,3 +16,4 @@
 - shadows.sh -- install shadowsocks server in *ubuntu 18.04 LTS*
 - shadows-server.json -- config file of ss server
 - shadows-client.json -- config file of ss client
+- 科学上午指南 -- 在终端下利用ssr-helper解析ssr URI 代理，并配置proxychain
