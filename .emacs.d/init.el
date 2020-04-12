@@ -150,9 +150,12 @@
 
 (with-eval-after-load 'org
   (setq org-log-done 'note))
+(with-eval-after-load 'org
+  (add-to-list 'org-export-backends 'md))
+
 
 (global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c \\") 'org-time-stamp)
+(global-set-key (kbd "C-c 9") 'org-time-stamp)
 ;;org-mode 自动换行
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 
@@ -293,7 +296,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/schedule/2020/2020-04-03.org")))
+ '(org-agenda-files
+   (quote
+    ("~/schedule/2020-04-11.org" "~/schedule/2020/2020-04-03.org")))
  '(package-selected-packages
    (quote
     (calendar-norway windresize windsize company-c-headers function-args sr-speedbar go-fill-struct go-errcheck go-complete go-autocomplete go go-imports go-rename neotree monokai-theme spacemacs-theme zenburn-theme go-imenu go-playground hc-zenburn-theme autopair magit helm-swoop elpy window-numbering undo-tree helm)))
