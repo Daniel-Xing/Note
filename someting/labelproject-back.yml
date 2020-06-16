@@ -30,6 +30,25 @@ services:
       - "/home/xingzheng/data/labelproject/home:/home"
     ports: 
       - 8887:8887
+  # web-golang:
+  #   container_name: labelproject-back-gin
+  #   image: labelproject-back-gin:latest
+  #   networks:
+  #     extnetwork:
+  #       ipv4_address: 172.20.0.5
+  #   volumes: 
+  #     - "/home/xingzheng/data/labelproject/home:/home"
+  #   ports: 
+  #     - 5556:5556
+  web-fore:
+    container_name: labelproject-fore-jave
+    image: danxing/labelproject-fore-java:latest 
+    networks:
+      extnetwork:
+        ipv4_address: 172.20.0.5
+    ports: 
+      - 8889:80
+
 
 networks:
    extnetwork:
