@@ -7,7 +7,7 @@
 5. ssr 连接梯子
 6. sh proxychain.sh
 7. 修改proxychain 配置文件
-8. sudo apt-get install zsh && sh -c "$(proxychain4 wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"  
+8. sudo apt-get install zsh && sh -c "$(proxychains4 wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"  
 9. sh go-install.sh
 10. sh go-pac.sh
 11. sh emacs.shsu
