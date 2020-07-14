@@ -2,7 +2,7 @@ version: '3.3'
 services: 
   db: 
     container_name: mysql
-    image: mysql:latest
+    image: danxing/mysql:latest
     environment: 
       MYSQL_ROOT_PASSWORD: 123456
     networks:
@@ -22,7 +22,7 @@ services:
         ipv4_address: 172.20.0.3
   web:
     container_name: labelproject-back
-    image: danxing/labelproject-back:2.1.1
+    image: danxing/labelproject-back:2.2.0
     networks:
       extnetwork:
         ipv4_address: 172.20.0.4
@@ -42,7 +42,7 @@ services:
   #     - 5556:5556
   web-fore:
     container_name: labelproject-fore-jave
-    image: danxing/labelproject-fore-java:latest 
+    image: danxing/labelproject-fore-java:latest
     networks:
       extnetwork:
         ipv4_address: 172.20.0.5

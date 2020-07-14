@@ -1,16 +1,17 @@
 * 科学上网指南
+** ssr (目前非常不稳 由于墙无脑封杀无状态流量包)
 1. 使用node安装ssr-helper
 2. 安装libsodium库文件(注意是最新版)以使用chacha20加密
 3. 运行脚本添加URI代理
 4. 测试运行
 
-** 添加git代理
+*** 添加git代理
 #+BEGIN_SRC shell
 git config --global http.proxy 'socks5://127.0.0.1:1080'
 git config --global https.proxy 'socks5://127.0.0.1:1080'
 #+END_SRC
 
-** 使用proxychain4
+*** 使用proxychain4
 #+BEGIN_SRC shell
 tar -zxvf proxychains-4.3.0.tar.gz 
 cd proxychains-4.3.0/
@@ -21,3 +22,11 @@ vim proxychains.conf 　　　　　#修改为　socks5 ip port 注意如果写�
 proxychains4　curl www.google.com　#测试
 #+END_SRC
 目前支持wget crul，不支持 telent
+
+** trojan
+伪装成https
+*** 步骤
+1. 准备好一个域名 并做好A级解析
+2. 购买一台境外的vps
+3. 上网随便搜一个trojan的一键安装脚本 并做好配置
+4. 无论是手机平台还是pc机都有支持trojan的客户端，linux 可以按照trojan git仓库的说明安装CLI版本，写好配置文件即可。 （注意： trojan客户端可以绑定0.0.0.0:address，其他设备可以通过scoks5协议来翻墙）
