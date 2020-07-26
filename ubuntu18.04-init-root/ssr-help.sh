@@ -12,3 +12,4 @@ sudo cp ~/trojan/trojan /usr/bin
 sudo cp config-client.json ~/
 sudo touch ~/trojan.log
 nohup trojan -c ~/config-client.json >> ~/trojan.log 2>&1 &
+sudo cp proxychains.conf ~/
