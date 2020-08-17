@@ -19,7 +19,7 @@
 - 科学上午指南 -- 在终端下利用ssr-helper解析ssr URI 代理，并配置proxychain
 
 ## Git commit rules
-> <type>(<scope>**: <subject>
+> "<type>(<scope>**: <subject>"
 ### type
 用于说明git commit的类别，只允许使用下面的标识。
 
