@@ -1,0 +1,128 @@
+cp ../labelproject-back/labelproject.sql ./
+ls
+docker run mysql
+docker build -t danxing/mysql:latest .
+cp /ect/apt/sources.list ./
+cp /etc/apt/sources.list ./
+docker build -t danxing/mysql:latest .
+ls ../labelproject-foreground-spring/
+ls ../labelproject-back/
+cat  ../labelproject-back/Dockerfile 
+cp ../labelproject-back/sources.list ./
+cp ../labelproject-back/Dockerfile ./TempDockerFile
+docker build -t danxing/mysql:latest .
+docker build -t danxing/mysql:latest .
+docker run danxing/mysql:latest
+docker run -d danxing/mysql:latest 
+docker container ls
+docker exec -it recursing_cerf /bin/bash
+docker containerstop  recursing_cerf 
+docker container stop  recursing_cerf 
+docker build -t danxing/mysql:latest .
+docker build -t danxing/mysql:latest .
+docker run -d danxing/mysql:latest 
+docker container ls
+docker exec -it thirsty_tu /bin/bash
+docker container stop thirsty_tu
+docker exec -it mysql /bin/bash
+expect initDatabase.sh 
+expect initDatabase.sh 
+apt-get install mysql
+apt-get install mysql-cli
+apt-get install mysql-server
+apt install mysql-server
+apt update && apt install mysql-server -y
+docker cp sources.list mysql:/etc/apt/
+docker exec -it mysql /bin/bash
+docker cp initDatabase.sh mysql:/root/
+docker exec -it mysql /bin/bash
+docker cp initDatabase.sh mysql:/root/
+docker exec -it mysql /bin/bash
+docker cp initDatabase.sh mysql:/root/
+docker exec -it mysql /bin/bash
+docker cp labelproject.sql mysql:/root/
+ls
+docker exec -it mysql /bin/bash
+docker build -t danxing/mysql:latest .
+docker cp initDatabase.sh mysql:/root/
+docker exec -it mysql /bin/bash
+docker cp initDatabase.sh mysql:/root/
+docker exec -it mysql /bin/bash
+docker cp initDatabase.sh mysql:/root/
+docker exec -it mysql /bin/bash
+docker build -t danxing/mysql:latest .
+docker build -t danxing/mysql:latest .
+docker run danxing/mysql:latest -d
+docker run -d danxing/mysql:latest
+docker container ps
+docker container ps
+docker exec -it suspicious_almeida /bin/bash
+docker build -t danxing/mysql:latest .
+docker run -d danxing/mysql:latest
+docker container sl
+docker container ls
+docker run danxing/mysql:latest
+docker build -t danxing/mysql:latest .
+docker run danxing/mysql:latest
+cd ..
+git clone https://github.com/xz1220/schedule.git
+proxychains4 git clone https://github.com/xz1220/schedule.git
+cd schedule/
+cd ~
+cd schedule/
+git add -A
+git commit -m " 	Update"
+git push origin master
+cd ~/Note/
+git pull origin master
+git add -A
+git commit -m " 	Update"
+git push origin master
+gaa && git commit -m "Update" && git push origin master
+git add _A && git commit -m "Update" && git push origin master
+git add -A && git commit -m "Update" && git push origin master
+git add -A && git commit -m "Update" && git push origin master
+cd ../schedule
+git add -A && git commit -m "Update" && git push origin master
+mv 2020/07/2020-07-11.org 2020/07/2020-07.org
+ls 2020/07
+git add -A && git commit -m "Update" && git push origin master
+ls /mnt/
+git checkout dev
+git --help
+git branch create dev
+git branch dev
+git checkout dev
+git add -A && git commit -m "Update" && git push origin master
+git add -A && git commit -m "Update" && git push origin dev
+git push origin dev
+git checkout master
+git pull
+git log --online --decorate --graph
+git log --oneline --decorate --graph
+ls
+git pull
+ls -l
+rm -rf v19.03.12.zip trojan-1.16.0-linux-amd64.tar.xz trojan-1.16.0-linux-amd64.tar.xz.1 pytorch-1.6.0-py3.8_cuda10.2.89_cudnn7.6.5_0.tar.bz2 q msys2-x86_64-20200720.exe master master.1 master.2 master.3 master.zip index.html index.html.1 cs144_vm.ova cs144_vm.ova.1 
+ls -l
+rm -rf 2020-07.org 2020060106565092.zip Git-2.28.0-64-bit.exe Microsoft.WindowsTerminalPreview_1.1.1812.0_8wekyb3d8bbwe.msixbundle Xshell-6.0.0197p.exe code-server_3.4.1_amd64.deb go1.13.4.linux-amd64.tar.gz install.bat install.sh wget-log 
+ls -a-l temp/
+ls
+ls -al
+git --gelp
+cd D:/
+ls
+ls -la
+go --version
+ls
+cd moby/
+ls
+cd moby-19.03.12/
+ls
+cd D:/
+ls
+cd schedule/
+git pull
+git config --global --unset https.proxy
+git config --global --unset http.proxy
+git pull

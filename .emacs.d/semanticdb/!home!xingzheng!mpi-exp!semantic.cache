@@ -1,0 +1,53 @@
+;; Object semanticdb-project-database-file
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file"
+  :tables
+  (list
+    (semanticdb-table "semanticdb-table"
+      :major-mode c-mode
+      :tags 
+        '( ("stdio.h" include (:system-flag t) nil [1 18])
+            ("mpi.h" include (:system-flag t) nil [72 87])
+            ("main" function
+               (:arguments 
+                  ( ("argc" variable (:type "int") (reparse-symbol arg-sub-list) [98 107])
+                    ("argv" variable
+                       (:pointer 2
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [108 120]))                  
+                :type "int")
+                nil [89 757]))          
+      :file "helloworld-example.c"
+      :pointmax 758
+      :fsize 756
+      :lastmodtime '(24198 52994 501062 2000)
+      :unmatched-syntax nil)
+    (semanticdb-table "semanticdb-table"
+      :major-mode c-mode
+      :tags 
+        '( ("stdio.h" include (:system-flag t) nil [1 18])
+            ("stdlib.h" include (:system-flag t) nil [19 37])
+            ("math.h" include (:system-flag t) nil [38 54])
+            ("/usr/lib64/mpi/gcc/openmpi/include/mpi.h" include (:system-flag t) nil [55 105])
+            ("BLOCK_LOW" variable (:constant-flag t) nil [138 147])
+            ("BLOCK_HIGH" variable (:constant-flag t) nil [179 189])
+            ("BLOCK_SIZE" variable (:constant-flag t) nil [232 242])
+            ("BLOCK_OWNER" variable (:constant-flag t) nil [301 312])
+            ("MIN" variable (:constant-flag t) nil [355 358])
+            ("main" function (:type "int") nil [385 432]))          
+      :file "eratos-version1.c"
+      :pointmax 433
+      :fsize 432
+      :lastmodtime '(24198 45395 200873 573000)
+      :unmatched-syntax nil
+      :lexical-table 
+        '(("MIN" (spp-arg-list ("a" "b") 358 . 363) . ((semantic-list "(((a)<(b))?(a):(b))" 364 . 383)))
+          ("BLOCK_LOW" (spp-arg-list ("id" "p" "n") 147 . 155) . ((semantic-list "((id)*(n)/(p))" 156 . 170)))
+          ("BLOCK_HIGH" (spp-arg-list ("id" "p" "n") 189 . 197) . ((semantic-list "(BLOCK_LOW((id)+1,p,n)-1)" 198 . 223)))
+          ("BLOCK_SIZE" (spp-arg-list ("id" "p" "n") 242 . 250) . ((semantic-list "(BLOCK_LOW((id)+1,p,n)-BLOCK_LOW(id,p,n))" 251 . 292)))
+          ("BLOCK_OWNER" (spp-arg-list ("id" "p" "n") 312 . 320) . ((semantic-list "(((p)*((index)+1)-1)/(n))" 321 . 346)))
+          )
+))
+  :file "!home!xingzheng!mpi-exp!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

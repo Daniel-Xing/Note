@@ -1,0 +1,453 @@
+;; Object semanticdb-project-database-file
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "semanticdb-project-database-file"
+  :tables
+  (list
+    (semanticdb-table "semanticdb-table"
+      :major-mode c++-mode
+      :tags 
+        '( ("MPIPP_H" variable (:constant-flag t) nil [975 982])
+            ("mpi.h" include nil nil [1304 1320])
+            ("map" include (:system-flag t) nil [1397 1411])
+            ("utility" include (:system-flag t) nil [1412 1430])
+            ("stdarg.h" include (:system-flag t) nil [1432 1451])
+            ("opal_mutex_t" type
+               (:prototype t
+                :type "struct")
+                nil [3027 3047])
+            ("ompi_mpi_cxx_op_intercept" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("invec" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [3156 3168])
+                    ("outvec" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [3169 3182])
+                    ("len" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [3183 3192])
+                    ("datatype" variable
+                       (:pointer 1
+                        :type ("MPI_Datatype" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3220 3243])
+                    ("fn" variable
+                       (:pointer 1
+                        :type ("MPI_User_function" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3244 3266]))                  
+                :type "void")
+                nil [3125 3267])
+            ("ompi_mpi_cxx_comm_errhandler_invoke" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("c_errhandler" variable
+                       (:pointer 1
+                        :type ("ompi_errhandler_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3321 3353])
+                    ("mpi_comm" variable
+                       (:pointer 1
+                        :type ("MPI_Comm" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3390 3409])
+                    ("err" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [3410 3419])
+                    ("message" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [3457 3477]))                  
+                :type "void")
+                nil [3280 3478])
+            ("ompi_mpi_cxx_win_errhandler_invoke" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("c_errhandler" variable
+                       (:pointer 1
+                        :type ("ompi_errhandler_t" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3530 3562])
+                    ("mpi_comm" variable
+                       (:pointer 1
+                        :type ("MPI_Win" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [3598 3616])
+                    ("err" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [3617 3626])
+                    ("message" variable
+                       (:pointer 1
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol arg-sub-list) [3662 3682]))                  
+                :type "void")
+                nil [3490 3683])
+            ("CommType" type
+               (:members 
+                  ( ("eIntracomm" variable
+                       (:constant-flag t
+                        :type "int")
+                        (reparse-symbol enumsubparts) [3989 4000])
+                    ("eIntercomm" variable
+                       (:constant-flag t
+                        :type "int")
+                        (reparse-symbol enumsubparts) [4001 4012])
+                    ("eCartcomm" variable
+                       (:constant-flag t
+                        :type "int")
+                        (reparse-symbol enumsubparts) [4013 4023])
+                    ("eGraphcomm" variable
+                       (:constant-flag t
+                        :type "int")
+                        (reparse-symbol enumsubparts) [4024 4035]))                  
+                :type "enum")
+                nil [3973 4036])
+            ("ompi_mpi_cxx_comm_copy_attr_intercept" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("oldcomm" variable (:type ("MPI_Comm" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4091 4108])
+                    ("keyval" variable (:type "int") (reparse-symbol arg-sub-list) [4109 4120])
+                    ("extra_state" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [4160 4178])
+                    ("attribute_val_in" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [4179 4202])
+                    ("attribute_val_out" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [4242 4266])
+                    ("flag" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [4267 4277])
+                    ("newcomm" variable (:type ("MPI_Comm" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4316 4333]))                  
+                :type "int")
+                nil [4049 4334])
+            ("ompi_mpi_cxx_comm_delete_attr_intercept" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("comm" variable (:type ("MPI_Comm" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4390 4404])
+                    ("keyval" variable (:type "int") (reparse-symbol arg-sub-list) [4405 4416])
+                    ("attribute_val" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [4458 4478])
+                    ("extra_state" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [4479 4497]))                  
+                :type "int")
+                nil [4346 4498])
+            ("ompi_mpi_cxx_type_copy_attr_intercept" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("oldtype" variable (:type ("MPI_Datatype" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4553 4574])
+                    ("keyval" variable (:type "int") (reparse-symbol arg-sub-list) [4575 4586])
+                    ("extra_state" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [4626 4644])
+                    ("attribute_val_in" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [4645 4668])
+                    ("attribute_val_out" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [4708 4732])
+                    ("flag" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [4733 4743]))                  
+                :type "int")
+                nil [4511 4744])
+            ("ompi_mpi_cxx_type_delete_attr_intercept" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("type" variable (:type ("MPI_Datatype" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4800 4818])
+                    ("keyval" variable (:type "int") (reparse-symbol arg-sub-list) [4819 4830])
+                    ("attribute_val" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [4872 4892])
+                    ("extra_state" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [4893 4911]))                  
+                :type "int")
+                nil [4756 4912])
+            ("ompi_mpi_cxx_win_copy_attr_intercept" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("oldwin" variable (:type ("MPI_Win" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [4966 4981])
+                    ("keyval" variable (:type "int") (reparse-symbol arg-sub-list) [4982 4993])
+                    ("extra_state" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [5033 5051])
+                    ("attribute_val_in" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [5052 5075])
+                    ("attribute_val_out" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [5115 5139])
+                    ("flag" variable
+                       (:pointer 1
+                        :type "int")
+                        (reparse-symbol arg-sub-list) [5140 5150]))                  
+                :type "int")
+                nil [4925 5151])
+            ("ompi_mpi_cxx_win_delete_attr_intercept" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("win" variable (:type ("MPI_Win" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [5206 5218])
+                    ("keyval" variable (:type "int") (reparse-symbol arg-sub-list) [5219 5230])
+                    ("attribute_val" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [5272 5292])
+                    ("extra_state" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [5293 5311]))                  
+                :type "int")
+                nil [5163 5312])
+            ("ompi_mpi_cxx_grequest_query_fn_intercept" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("state" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [5418 5430])
+                    ("status" variable
+                       (:pointer 1
+                        :type ("MPI_Status" type (:type "class") nil nil))
+                        (reparse-symbol arg-sub-list) [5431 5450]))                  
+                :type "int")
+                nil [5372 5451])
+            ("ompi_mpi_cxx_grequest_free_fn_intercept" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("state" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [5508 5520]))                  
+                :type "int")
+                nil [5463 5521])
+            ("ompi_mpi_cxx_grequest_cancel_fn_intercept" function
+               (:prototype-flag t
+                :arguments 
+                  ( ("state" variable
+                       (:pointer 1
+                        :type "void")
+                        (reparse-symbol arg-sub-list) [5580 5592])
+                    ("canceled" variable (:type "int") (reparse-symbol arg-sub-list) [5593 5606]))                  
+                :type "int")
+                nil [5533 5607])
+            ("OPAL_INT_TO_BOOL" variable (:constant-flag t) nil [5862 5878])
+            ("MPI" type
+               (:members 
+                  ( ("mpi_errno" variable
+                       (:typemodifiers ("extern")
+                        :type "int")
+                        (reparse-symbol namespacesubparts) [6106 6127])
+                    ("Comm_Null" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [6138 6154])
+                    ("Comm" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [6157 6168])
+                    ("Intracomm" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [6171 6187])
+                    ("Intercomm" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [6190 6206])
+                    ("Graphcomm" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [6209 6225])
+                    ("Cartcomm" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [6228 6243])
+                    ("Datatype" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [6246 6261])
+                    ("Errhandler" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [6264 6281])
+                    ("Group" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [6284 6296])
+                    ("Op" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [6299 6308])
+                    ("Request" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [6311 6325])
+                    ("Grequest" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [6328 6343])
+                    ("Status" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [6346 6359])
+                    ("Info" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [6362 6373])
+                    ("Win" type
+                       (:prototype t
+                        :type "class")
+                        (reparse-symbol namespacesubparts) [6376 6386])
+                    ("Aint" type
+                       (:typedef ("MPI_Aint" type (:type "class") nil nil)
+                        :type "typedef")
+                        (reparse-symbol namespacesubparts) [6447 6469])
+                    ("Fint" type
+                       (:typedef ("MPI_Fint" type (:type "class") nil nil)
+                        :type "typedef")
+                        (reparse-symbol namespacesubparts) [6472 6494])
+                    ("Offset" type
+                       (:typedef ("MPI_Offset" type (:type "class") nil nil)
+                        :type "typedef")
+                        (reparse-symbol namespacesubparts) [6497 6523])
+                    ("openmpi/ompi/mpi/cxx/constants.h" include (:inside-ns t) (reparse-symbol namespacesubparts) [6680 6723])
+                    ("openmpi/ompi/mpi/cxx/functions.h" include (:inside-ns t) (reparse-symbol namespacesubparts) [6724 6767])
+                    ("openmpi/ompi/mpi/cxx/datatype.h" include (:inside-ns t) (reparse-symbol namespacesubparts) [6768 6810])
+                    ("User_function" function
+                       (:prototype-flag t
+                        :arguments 
+                          ( ("invec" variable
+                               (:pointer 1
+                                :constant-flag t
+                                :type "void")
+                                (reparse-symbol arg-sub-list) [6848 6866])
+                            ("inoutvec" variable
+                               (:pointer 1
+                                :type "void")
+                                (reparse-symbol arg-sub-list) [6867 6882])
+                            ("len" variable (:type "int") (reparse-symbol arg-sub-list) [6883 6891])
+                            ("datatype" variable
+                               (:reference 1
+                                :constant-flag t
+                                :type ("Datatype" type (:type "class") nil nil))
+                                (reparse-symbol arg-sub-list) [6900 6925]))                          
+                        :type "void")
+                        (reparse-symbol namespacesubparts) [6829 6926])
+                    ("openmpi/ompi/mpi/cxx/exception.h" include (:inside-ns t) (reparse-symbol namespacesubparts) [7709 7752])
+                    ("openmpi/ompi/mpi/cxx/op.h" include (:inside-ns t) (reparse-symbol namespacesubparts) [7753 7789])
+                    ("openmpi/ompi/mpi/cxx/status.h" include (:inside-ns t) (reparse-symbol namespacesubparts) [7790 7830])
+                    ("openmpi/ompi/mpi/cxx/request.h" include (:inside-ns t) (reparse-symbol namespacesubparts) [7831 7872])
+                    ("openmpi/ompi/mpi/cxx/group.h" include (:inside-ns t) (reparse-symbol namespacesubparts) [7901 7940])
+                    ("openmpi/ompi/mpi/cxx/comm.h" include (:inside-ns t) (reparse-symbol namespacesubparts) [7942 7980])
+                    ("openmpi/ompi/mpi/cxx/win.h" include (:inside-ns t) (reparse-symbol namespacesubparts) [7981 8018])
+                    ("openmpi/ompi/mpi/cxx/errhandler.h" include (:inside-ns t) (reparse-symbol namespacesubparts) [8101 8145])
+                    ("openmpi/ompi/mpi/cxx/intracomm.h" include (:inside-ns t) (reparse-symbol namespacesubparts) [8146 8189])
+                    ("openmpi/ompi/mpi/cxx/topology.h" include (:inside-ns t) (reparse-symbol namespacesubparts) [8190 8232])
+                    ("openmpi/ompi/mpi/cxx/intercomm.h" include (:inside-ns t) (reparse-symbol namespacesubparts) [8268 8311])
+                    ("openmpi/ompi/mpi/cxx/info.h" include (:inside-ns t) (reparse-symbol namespacesubparts) [8312 8350])
+                    ("ompi_libcxx_version_string" variable
+                       (:dereference 1
+                        :typemodifiers ("extern")
+                        :constant-flag t
+                        :type "char")
+                        (reparse-symbol namespacesubparts) [8385 8432]))                  
+                :type "namespace")
+                nil [6050 8434])
+            ("openmpi/ompi/mpi/cxx/datatype_inln.h" include nil nil [9656 9703])
+            ("openmpi/ompi/mpi/cxx/functions_inln.h" include nil nil [9704 9752])
+            ("openmpi/ompi/mpi/cxx/request_inln.h" include nil nil [9753 9799])
+            ("openmpi/ompi/mpi/cxx/comm_inln.h" include nil nil [9800 9843])
+            ("openmpi/ompi/mpi/cxx/intracomm_inln.h" include nil nil [9844 9892])
+            ("openmpi/ompi/mpi/cxx/topology_inln.h" include nil nil [9893 9940])
+            ("openmpi/ompi/mpi/cxx/intercomm_inln.h" include nil nil [9941 9989])
+            ("openmpi/ompi/mpi/cxx/group_inln.h" include nil nil [9990 10034])
+            ("openmpi/ompi/mpi/cxx/op_inln.h" include nil nil [10035 10076])
+            ("openmpi/ompi/mpi/cxx/errhandler_inln.h" include nil nil [10077 10126])
+            ("openmpi/ompi/mpi/cxx/status_inln.h" include nil nil [10127 10172])
+            ("openmpi/ompi/mpi/cxx/info_inln.h" include nil nil [10173 10216])
+            ("openmpi/ompi/mpi/cxx/win_inln.h" include nil nil [10217 10259]))          
+      :file "mpicxx.h"
+      :pointmax 10441
+      :fsize 10440
+      :lastmodtime '(23694 849 0 0)
+      :unmatched-syntax '((TYPEDEF 6821 . 6828))
+      :lexical-table 
+        '(("MPIPP_H")
+          ("OPAL_INT_TO_BOOL" (spp-arg-list ("VALUE") 5878 . 5885) . ((semantic-list "((bool)(VALUE))" 5887 . 5902)))
+          )
+)
+    (semanticdb-table "semanticdb-table"
+      :file "datatype_inln.h"
+      :fsize 12489
+      :lastmodtime '(23694 849 0 0))
+    (semanticdb-table "semanticdb-table"
+      :file "functions_inln.h"
+      :fsize 4940
+      :lastmodtime '(23694 849 0 0))
+    (semanticdb-table "semanticdb-table"
+      :file "request_inln.h"
+      :fsize 9834
+      :lastmodtime '(23694 849 0 0))
+    (semanticdb-table "semanticdb-table"
+      :file "comm_inln.h"
+      :fsize 19932
+      :lastmodtime '(23694 849 0 0))
+    (semanticdb-table "semanticdb-table"
+      :file "intracomm_inln.h"
+      :fsize 6572
+      :lastmodtime '(23694 849 0 0))
+    (semanticdb-table "semanticdb-table"
+      :file "topology_inln.h"
+      :fsize 5119
+      :lastmodtime '(23694 849 0 0))
+    (semanticdb-table "semanticdb-table"
+      :file "intercomm_inln.h"
+      :fsize 1965
+      :lastmodtime '(23694 849 0 0))
+    (semanticdb-table "semanticdb-table"
+      :file "group_inln.h"
+      :fsize 3284
+      :lastmodtime '(23694 849 0 0))
+    (semanticdb-table "semanticdb-table"
+      :file "op_inln.h"
+      :fsize 3587
+      :lastmodtime '(23694 849 0 0))
+    (semanticdb-table "semanticdb-table"
+      :file "errhandler_inln.h"
+      :fsize 1314
+      :lastmodtime '(23694 849 0 0))
+    (semanticdb-table "semanticdb-table"
+      :file "status_inln.h"
+      :fsize 2226
+      :lastmodtime '(23694 849 0 0))
+    (semanticdb-table "semanticdb-table"
+      :file "info_inln.h"
+      :fsize 1965
+      :lastmodtime '(23694 849 0 0))
+    (semanticdb-table "semanticdb-table"
+      :file "win_inln.h"
+      :fsize 7434
+      :lastmodtime '(23694 849 0 0)))
+  :file "!usr!lib64!mpi!gcc!openmpi!include!openmpi!ompi!mpi!cxx!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

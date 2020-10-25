@@ -1,0 +1,10 @@
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*- 
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("mpi-exp"
+ (filename . "~/mpi-exp/")
+ (front-context-string . ".dir-locals.el\n ")
+ (rear-context-string . "99 4月   3 12:06 ")
+ (position . 192))
+)

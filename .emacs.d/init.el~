@@ -32,9 +32,9 @@
 (electric-pair-mode t)
 
 ;;隐藏侧边栏工具栏
-;;(tool-bar-mode 0)
-;;(menu-bar-mode 0)
-;;(scroll-bar-mode 0)
+(tool-bar-mode 0)
+(menu-bar-mode 0)
+(scroll-bar-mode 0)
 
 
 (load-theme 'zenburn t)
@@ -298,7 +298,7 @@
  ;; If there is more than one, they won't work right.
  '(org-agenda-files
    (quote
-    ("~/schedule/2020/07/2020-07-11.org" "~/schedule/2020/06/2020-06-05.org" "~/schedule/2020/06/2020-06-04.org" "~/schedule/2020/06/2020-06-03.org" "~/schedule/2020/06/2020-06-02.org")))
+    ("~/schedule/2020/06/2020-06-05.org" "~/schedule/2020/06/2020-06-04.org" "~/schedule/2020/06/2020-06-03.org" "~/schedule/2020/06/2020-06-02.org")))
  '(package-selected-packages
    (quote
     (calendar-norway windresize windsize company-c-headers function-args sr-speedbar go-fill-struct go-errcheck go-complete go-autocomplete go go-imports go-rename neotree monokai-theme spacemacs-theme zenburn-theme go-imenu go-playground hc-zenburn-theme autopair magit helm-swoop elpy window-numbering undo-tree helm)))
