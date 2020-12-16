@@ -1,0 +1,12 @@
+{
+    "leetcode.workspaceFolder": "/root/leetcode-go/",
+    "leetcode.filePath": {
+
+        "default": {
+            // relative folder path
+            "folder": "",
+            // file name
+            "filename": "${tag}/${id}.${kebab-case-name}.${ext}"
+        }
+    },
+}

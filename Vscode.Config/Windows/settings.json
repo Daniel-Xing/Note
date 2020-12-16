@@ -1,0 +1,173 @@
+{
+    "python.pythonPath": "C:\\Users\\30249\\Anaconda3\\python.exe",
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "explorer.confirmDelete": false,
+    "python.jediEnabled": false,
+    "python.dataScience.sendSelectionToInteractiveWindow": true,
+    "vs-kubernetes": {
+        "vs-kubernetes.helm-path": "C:\\Users\\30249\\.vs-kubernetes\\tools\\helm\\windows-amd64\\helm.exe",
+        "vs-kubernetes.kubectl-path": "C:\\Users\\30249\\.vs-kubernetes\\tools\\kubectl\\kubectl.exe",
+        "vs-kubernetes.minikube-path": "C:\\Users\\30249\\.vs-kubernetes\\tools\\minikube\\windows-amd64\\minikube.exe",
+        "vs-kubernetes.draft-path": "C:\\Users\\30249\\.vs-kubernetes\\tools\\draft\\windows-amd64\\draft.exe"
+    },
+    "files.autoSave": "onFocusChange",
+    "editor.fontSize": 18,
+    "go.goroot": "C:\\go",
+    "go.gopath": "C:\\Users\\30249\\go",
+    "window.zoomLevel": -1,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "leetcode.endpoint": "leetcode-cn",
+    "leetcode.workspaceFolder": "/home/xingzheng/leetcode",
+    "leetcode.defaultLanguage": "golang",
+    "leetcode.hint.configWebviewMarkdown": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": true,
+    "files.associations": {
+
+
+
+
+    
+    
+        "*.wpy":"vue",
+        "*.vue":"html",
+        "*.html":"html"
+    },
+    "emmet.triggerExpansionOnTab": true,
+    "editor.parameterHints.enabled":true,
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": true,
+        "strings": true
+    },
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true,
+    "git.autofetch": true,
+    "docker.host": "tcp://localhost:2375",
+    "leetcode.showCommentDescription": true,
+    "org.todoKeywords": [
+        "TODO",
+        "DONE",
+        "WAIT",
+        "SCHD"
+    ],
+    "terminal.integrated.fontFamily": "Consolas",
+    "cmake.configureOnOpen": true,
+    "workbench.iconTheme": "vscode-great-icons",
+    "terminal.integrated.inheritEnv": false,
+    "terminal.integrated.shell.linux": "/bin/zsh",
+    "remote.SSH.remotePlatform": {
+        "aliyun": "linux",
+        "baiduyun": "linux"
+    },
+    "code-runner.executorMap": {
+        "javascript": "node",
+        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        //"cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt -fopenmp -l msmpi -L \"C:\\Program Files (x86)\\Microsoft SDKs\\MPI\\Lib\\x64\" -I \"C:\\Program Files (x86)\\Microsoft SDKs\\MPI\\Include\" && mpiexec -n 4 $dir$fileNameWithoutExt",
+        "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "php": "php",
+        "python": "python -u",
+        "perl": "perl",
+        "perl6": "perl6",
+        "ruby": "ruby",
+        "go": "go run",
+        "lua": "lua",
+        "groovy": "groovy",
+        "powershell": "powershell -ExecutionPolicy ByPass -File",
+        "bat": "cmd /c",
+        "shellscript": "bash",
+        "fsharp": "fsi",
+        "csharp": "scriptcs",
+        "vbscript": "cscript //Nologo",
+        "typescript": "ts-node",
+        "coffeescript": "coffee",
+        "scala": "scala",
+        "swift": "swift",
+        "julia": "julia",
+        "crystal": "crystal",
+        "ocaml": "ocaml",
+        "r": "Rscript",
+        "applescript": "osascript",
+        "clojure": "lein exec",
+        "haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt",
+        "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
+        "racket": "racket",
+        "scheme": "csi -script",
+        "ahk": "autohotkey",
+        "autoit": "autoit3",
+        "dart": "dart",
+        "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
+        "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt",
+        "haskell": "runhaskell",
+        "nim": "nim compile --verbosity:0 --hints:off --run",
+        "lisp": "sbcl --script",
+        "kit": "kitc --run",
+        "v": "v run",
+        "sass": "sass --style expanded",
+        "scss": "scss --style expanded"
+    },
+    "explorer.confirmDragAndDrop": false,
+    "editor.codeActionsOnSave": null,
+    "C_Cpp.commentContinuationPatterns": [
+
+        "/**"
+    ],
+    "C_Cpp.default.compilerArgs": [],
+    "git.path": "",
+    "docker.commands.attach": null,
+    "java.semanticHighlighting.enabled": true,
+    "tabnine.experimentalAutoImports": true,
+    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"/home/xingzheng/.vscode-server/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
+    // "leetcode.filePath": {
+    
+    // }
+    "leetcode.workspaceFolder": "/root/leetcode-go/",
+    "leetcode.filePath": {
+
+        "default": {
+            // relative folder path
+            "folder": "",
+            // file name
+            "filename": "${tag}/${id}.${kebab-case-name}.${ext}"
+        }
+    },
+    // "git.ignoreMissingGitWarning": true,
+    // // "window.zoomLevel": 0,
+    // // "explorer.confirmDelete": false,
+    // // "files.autoSave": "onWindowChange",
+    // "files.autoSaveDelay": 0,
+    // "update.enableWindowsBackgroundUpdates": true,
+    // "background.customImages": [
+    //     "file:///C:/Users/30249/Pictures/壁纸/03.jpg"//图片地址
+    // ],
+    // "background.style": {
+    //     "content":"''",
+    //     "pointer-events":"none",
+    //     "position":"absolute",//图片位置
+    //     "width":"100%",
+    //     "height":"100%",
+    //     "z-index":"99999",
+    //     "background.repeat":"no-repeat",
+    //     "background-size":"100%,100%",//图片大小
+    //     "opacity":0.5 //透明度
+    // },
+    // "background.useFront": true,
+    // "background.useDefault": false,//是否使用默认图片
+    // "liveServer.settings.donotShowInfoMsg": true,
+    // // "workbench.colorTheme": "Monokai",
+    // // "editor.quickSuggestions": {
+    // //     "strings": true
+    // // },
+    // "[javascript]": {
+    //     "editor.defaultFormatter": "vscode.typescript-language-features"
+    // },
+    "winopacity.opacity": 100,
+    "leetcode.hint.commandShortcut": false //设置窗口透明度。
+}
