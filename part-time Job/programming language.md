@@ -107,8 +107,20 @@ func growslice(et *_type, old slice, cap int) slice {
 
 **敲重点！！！！此外，以上两个分支得到新容量后，均需要根据slice的类型size，算出新的容量所需的内存情况`capmem`，然后再进行`capmem`向上取整，得到新的所需内存，除上类型size，得到真正的最终容量,作为新的slice的容量。**
 
+#### [Hash表](https://draveness.me/golang/docs/part2-foundation/ch03-datastructure/golang-hashmap/)
 
+#### String
 
+不可变字符串，结构如下
+
+```go
+type StringHeader struct {
+	Data uintptr  // 指向底层string
+	Len  int			// 长度
+}
+```
+
+需要转换为[]byte 类型进行修改，[]byte类型也可以转换为string 类型，都需要发生内存拷贝，因此为造成性能损失
 
 ### 其他
 
