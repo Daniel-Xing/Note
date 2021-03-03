@@ -230,6 +230,7 @@ GDB的一些常用命令如下所示
 		#1  0x000000000040d61e in runtime.main () at /home/xiemengjun/go/src/pkg/runtime/proc.c:244
 		#2  0x000000000040d6c1 in schedunlock () at /home/xiemengjun/go/src/pkg/runtime/proc.c:267
 		#3  0x0000000000000000 in ?? ()
+	
 - info
 
 	info命令用来显示信息，后面有几种参数，我们常用的有如下几种：
@@ -248,6 +249,7 @@ GDB的一些常用命令如下所示
 			* 2  syscall runtime.entersyscall
 			  3  waiting runtime.gosched
 			  4 runnable runtime.gosched
+	
 - print
 
 	简写命令`p`，用来打印变量或者其他信息，后面跟上需要打印的变量名，当然还有一些很有用的函数$len()和$cap()，用来返回当前string、slices或者maps的长度和容量。
@@ -257,9 +259,11 @@ GDB的一些常用命令如下所示
 	用来显示当前变量的类型，后面跟上变量名，例如`whatis msg`,显示如下：
 
 		type = struct string
+	
 - next
 
 	简写命令 `n`,用来单步调试，跳到下一步，当有断点之后，可以输入`n`跳转到下一步继续执行
+	
 - continue
 
 	简称命令 `c`，用来跳出当前断点处，后面可以跟参数N，跳过多少次断点
@@ -269,6 +273,10 @@ GDB的一些常用命令如下所示
 	该命令用来改变运行过程中的变量值，格式如：`set variable <var>=<value>`
 
 
+
+
+
+org.apache.flink.runtime.rest.handler.RestHandlerException: Could not execute application. at org.apache.flink.runtime.webmonitor.handlers.JarRunHandler.lambda$handleRequest$1(JarRunHandler.java:103) at java.util.concurrent.CompletableFuture.uniHandle(CompletableFuture.java:836) at java.util.concurrent.CompletableFuture$UniHandle.tryFire(CompletableFuture.java:811) at java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488) at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1609) at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) at java.util.concurrent.FutureTask.run(FutureTask.java:266) at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180) at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293) at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) at java.lang.Thread.run(Thread.java:748) Caused by: java.util.concurrent.CompletionException: org.apache.flink.util.FlinkRuntimeException: Could not execute application. at java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:273) at java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:280) at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1606) ... 7 more Caused by: org.apache.flink.util.FlinkRuntimeException: Could not execute application. at
 
 
 
