@@ -326,5 +326,7 @@ EDITOR=vim crontab -e // 指定编辑器为vim，使用export导入环境变量
 
 ![image-20210303133240816](/Users/xingzheng/Library/Application Support/typora-user-images/image-20210303133240816.png)
 
+
+
 ### 
 
