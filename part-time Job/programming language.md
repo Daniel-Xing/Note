@@ -2,8 +2,6 @@
 
 ## Golang
 
-### GC
-
 ### 基础
 
 #### Array 
@@ -144,6 +142,131 @@ container包中包含三个主要的东西，一个是heap 定义了一些接口
 
 如果a接口中包含b，c两个接口，且b，c两个接口中有重名，那么在go1.14 之前会报编译错误，但是在go1.14中修复了这个错误。
 
+#### 函数
+
+函数是一等公民：
+
+- c语言函数传递参数和返回值使用寄存器和栈共同来操作，返回值只使用一个栈，所以不支持多返回值。GO语言使用栈来进行参数的传递与返回，只需要在栈上多分配一些空间即可实现多返回值，但是牺牲了性能。
+- go语言值拷贝，传递大的结构体的时候注意使用指针传递； 结构体在内存中是连续的一块区域，指针指向结构体顶部。
+
+#### 接口
+
+接口是一些方法签名的集合； 鸭子类型，实现接口的时候不需要指定，在特定时候会进行类型转换进行Check；
+
+- go中的接口分为两种类型：runtime.iface(带有一组方法的接口)，runtime.eface(不带方法的接口)
+- 空接口interface{} != nil
+
+#### 反射
+
+反射给Go提供了元编程的能力；Go中的反射主要集中于两种reflect.Type 和reflect.Value，可以使用提供的reflect.TypeOf和reflect.ValueOf来获取变量类型。
+
+#### for range
+
+```go
+// 第一个例子
+func main() {
+	arr := []int{1, 2, 3}
+	for _, v := range arr {
+		arr = append(arr, v)
+	}
+	fmt.Println(arr)
+}
+
+$ go run main.go
+1 2 3 1 2 3
+
+// 第二个例子
+func main() {
+	arr := []int{1, 2, 3}
+	newArr := []*int{}
+	for _, v := range arr {
+		newArr = append(newArr, &v)
+	}
+	for _, v := range newArr {
+		fmt.Println(*v)
+	}
+}
+
+$ go run main.go
+3 3 3
+```
+
+**针对于遍历切片，运行时会被替换为**：
+
+```go
+ha := a
+hv1 := 0
+hn := len(ha)
+v1 := hv1
+for ; hv1 < hn; hv1++ {
+    ...
+}
+
+/**
+....
+**/
+
+ha := a
+hv1 := 0
+hn := len(ha)
+v1 := hv1
+v2 := nil
+for ; hv1 < hn; hv1++ {
+    tmp := ha[hv1]
+    v1, v2 = hv1, tmp
+    ...
+}
+```
+
+即：会用新的变量来替换原来的数组，并且循环内部会复用元素，因此要注意变量的作用域
+
+**对于字符串**
+
+```go
+ha := s
+for hv1 := 0; hv1 < len(ha); {
+    hv1t := hv1
+    hv2 := rune(ha[hv1])  // 将字符数组转换为rune类型
+    if hv2 < utf8.RuneSelf {
+        hv1++
+    } else {
+        hv2, hv1 = decoderune(ha, hv1)
+    }
+    v1, v2 = hv1t, hv2
+}
+```
+
+**针对于Map**：编译时会插入一个随机数，来决定开始遍历的起点
+
+**针对Channel** ：
+
+```go
+for v := range ch {} 
+
+// 展开
+ha := a
+hv1, hb := <-ha
+for ; hb != false; hv1, hb = <-ha {
+    v1 := hv1
+    hv1 = nil
+    ...
+}
+```
+
+
+
+### GC
+
+### 标准库
+
+#### math
+
+##### rand：
+
+使用rand进行负载均衡的时候，如果多个go routine使用的是同一个随机数种子，那么生成的随机数是一样的。
+
+
+
 ### 进阶
 
 #### golang 的GMP模型
@@ -275,8 +398,6 @@ GDB的一些常用命令如下所示
 
 
 
-
-org.apache.flink.runtime.rest.handler.RestHandlerException: Could not execute application. at org.apache.flink.runtime.webmonitor.handlers.JarRunHandler.lambda$handleRequest$1(JarRunHandler.java:103) at java.util.concurrent.CompletableFuture.uniHandle(CompletableFuture.java:836) at java.util.concurrent.CompletableFuture$UniHandle.tryFire(CompletableFuture.java:811) at java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:488) at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1609) at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) at java.util.concurrent.FutureTask.run(FutureTask.java:266) at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180) at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293) at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) at java.lang.Thread.run(Thread.java:748) Caused by: java.util.concurrent.CompletionException: org.apache.flink.util.FlinkRuntimeException: Could not execute application. at java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:273) at java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:280) at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1606) ... 7 more Caused by: org.apache.flink.util.FlinkRuntimeException: Could not execute application. at
 
 
 
