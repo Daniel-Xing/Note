@@ -316,7 +316,141 @@ for ; hb != false; hv1, hb = <-ha {
 
 #### Context
 
+[context 详解](https://www.cnblogs.com/qcrao-2018/p/11007503.html)
 
+**接口定义**
+
+```go
+type Context interface {
+	Deadline() (deadline time.Time, ok bool)
+	Done() <-chan struct{}
+	Err() error
+	Value(key interface{}) interface{}
+}
+```
+
+**作用**
+
+- 协调多个goroutines，取消一个context时，同级别的context或者子context都会被取消
+- 本质上是类似于一个链表结构，取消操作的复杂度是O(n)。由于加了锁，所以context是线程安全的
+
+#### 同步原语
+
+[同步 - go语言设计与实现](https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-sync-primitives/)
+
+![golang-basic-sync-primitives](/Users/xingzheng/Note/part-time Job/img/2020-01-23-15797104327981-golang-basic-sync-primitives.png)
+
+**Mutex - 互斥锁**
+
+互斥锁的加锁过程比较复杂，它涉及自旋、信号量以及调度等概念：
+
+- 如果互斥锁处于初始化状态，会通过置位 `mutexLocked` 加锁；
+- 如果互斥锁处于 `mutexLocked` 状态并且在普通模式下工作，会进入自旋，执行 30 次 `PAUSE` 指令消耗 CPU 时间等待锁的释放；
+- 如果当前 Goroutine 等待锁的时间超过了 1ms，互斥锁就会切换到饥饿模式；
+- 互斥锁在正常情况下会通过 [`runtime.sync_runtime_SemacquireMutex`](https://draveness.me/golang/tree/runtime.sync_runtime_SemacquireMutex) 将尝试获取锁的 Goroutine 切换至休眠状态，等待锁的持有者唤醒；
+- 如果当前 Goroutine 是互斥锁上的最后一个等待的协程或者等待的时间小于 1ms，那么它会将互斥锁切换回正常模式；
+
+互斥锁的解锁过程与之相比就比较简单，其代码行数不多、逻辑清晰，也比较容易理解：
+
+- 当互斥锁已经被解锁时，调用 [`sync.Mutex.Unlock`](https://draveness.me/golang/tree/sync.Mutex.Unlock) 会直接抛出异常；
+- 当互斥锁处于饥饿模式时，将锁的所有权交给队列中的下一个等待者，等待者会负责设置 `mutexLocked` 标志位；
+- 当互斥锁处于普通模式时，如果没有 Goroutine 等待锁的释放或者已经有被唤醒的 Goroutine 获得了锁，会直接返回；在其他情况下会通过 [`sync.runtime_Semrelease`](https://draveness.me/golang/tree/sync.runtime_Semrelease) 唤醒对应的 Goroutine；
+
+**读写锁 - RWMutex**
+
+读写互斥锁 [`sync.RWMutex`](https://draveness.me/golang/tree/sync.RWMutex) 是细粒度的互斥锁，它不限制资源的并发读，但是读写、写写操作无法并行执行。
+
+|      |  读  |  写  |
+| :--: | :--: | :--: |
+|  读  |  Y   |  N   |
+|  写  |  N   |  N   |
+
+**表 6-1 RWMutex 的读写并发**
+
+常见服务的资源读写比例会非常高，因为大多数的读请求之间不会相互影响，所以我们可以分离读写操作，以此来提高服务的性能。
+
+[`sync.RWMutex`](https://draveness.me/golang/tree/sync.RWMutex) 中总共包含以下 5 个字段：
+
+```go
+type RWMutex struct {
+	w           Mutex
+	writerSem   uint32
+	readerSem   uint32
+	readerCount int32
+	readerWait  int32
+}
+```
+
+- `w` — 复用互斥锁提供的能力；
+- `writerSem` 和 `readerSem` — 分别用于写等待读和读等待写：
+- `readerCount` 存储了当前正在执行的读操作数量；
+- `readerWait` 表示当写操作被阻塞时等待的读操作个数；
+
+我们会依次分析获取写锁和读锁的实现原理，其中：
+
+- 写操作使用 [`sync.RWMutex.Lock`](https://draveness.me/golang/tree/sync.RWMutex.Lock) 和 [`sync.RWMutex.Unlock`](https://draveness.me/golang/tree/sync.RWMutex.Unlock) 方法；
+- 读操作使用 [`sync.RWMutex.RLock`](https://draveness.me/golang/tree/sync.RWMutex.RLock) 和 [`sync.RWMutex.RUnlock`](https://draveness.me/golang/tree/sync.RWMutex.RUnlock) 方法；
+
+虽然读写互斥锁 [`sync.RWMutex`](https://draveness.me/golang/tree/sync.RWMutex) 提供的功能比较复杂，但是因为它建立在 [`sync.Mutex`](https://draveness.me/golang/tree/sync.Mutex) 上，所以实现会简单很多。我们总结一下读锁和写锁的关系：
+
+- 调用`sync.RWMutex.Lock`尝试获取写锁时；
+  - 每次 [`sync.RWMutex.RUnlock`](https://draveness.me/golang/tree/sync.RWMutex.RUnlock) 都会将 `readerCount` 其减一，当它归零时该 Goroutine 会获得写锁；
+  - 将 `readerCount` 减少 `rwmutexMaxReaders` 个数以阻塞后续的读操作；
+- 调用 [`sync.RWMutex.Unlock`](https://draveness.me/golang/tree/sync.RWMutex.Unlock) 释放写锁时，会先通知所有的读操作，然后才会释放持有的互斥锁；
+
+读写互斥锁在互斥锁之上提供了额外的更细粒度的控制，能够在读操作远远多于写操作时提升性能。
+
+**WaitGroup**
+
+**Once**
+
+**Cond**
+
+**Other**
+
+[`golang/sync/errgroup.Group`](https://draveness.me/golang/tree/golang/sync/errgroup.Group)、[`golang/sync/semaphore.Weighted`](https://draveness.me/golang/tree/golang/sync/semaphore.Weighted) 和 [`golang/sync/singleflight.Group`](https://draveness.me/golang/tree/golang/sync/singleflight.Group)
+
+#### channel
+
+[chanel - go语言设计与实现](https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-channel/#643-创建管道)
+
+**基本的数据结构**
+
+```go
+type hchan struct {
+	qcount   uint
+	dataqsiz uint
+	buf      unsafe.Pointer
+	elemsize uint16
+	closed   uint32
+	elemtype *_type
+	sendx    uint
+	recvx    uint
+	recvq    waitq
+	sendq    waitq
+
+	lock mutex
+}
+```
+
+结构体中的五个字段 `qcount`、`dataqsiz`、`buf`、`sendx`、`recv` 构建底层的循环队列：
+
+- `qcount` — Channel 中的元素个数；
+- `dataqsiz` — Channel 中的循环队列的长度；
+- `buf` — Channel 的缓冲区数据指针；
+- `sendx` — Channel 的发送操作处理到的位置；
+- `recvx` — Channel 的接收操作处理到的位置；
+
+除此之外，`elemsize` 和 `elemtype` 分别表示当前 Channel 能够收发的元素类型和大小；`sendq` 和 `recvq` 存储了当前 Channel 由于缓冲区空间不足而阻塞的 Goroutine 列表，这些等待队列使用双向链表 [`runtime.waitq`](https://draveness.me/golang/tree/runtime.waitq) 表示，链表中所有的元素都是 [`runtime.sudog`](https://draveness.me/golang/tree/runtime.sudog) 结构：
+
+```go
+type waitq struct {
+	first *sudog
+	last  *sudog
+}
+```
+
+[`runtime.sudog`](https://draveness.me/golang/tree/runtime.sudog) 表示一个在等待列表中的 Goroutine，该结构中存储了两个分别指向前后 [`runtime.sudog`](https://draveness.me/golang/tree/runtime.sudog) 的指针以构成链表。
 
 #### GC
 
