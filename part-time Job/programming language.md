@@ -23,6 +23,7 @@ type SliceHeader struct {
 // len(slice) or cap(slice) 获取容量
 ```
 
+
 ##### 拷贝
 
 ```go
@@ -105,9 +106,18 @@ func growslice(et *_type, old slice, cap int) slice {
 
 **敲重点！！！！此外，以上两个分支得到新容量后，均需要根据slice的类型size，算出新的容量所需的内存情况`capmem`，然后再进行`capmem`向上取整，得到新的所需内存，除上类型size，得到真正的最终容量,作为新的slice的容量。**
 
+<details>
+<summary><strong>如何实现栈和队列</strong></summary>
+1.  通过slice实现，入栈出栈可以使用切片来实现。但是有内存泄漏的风险
+2.  利用标准库里面的container/link（双向链表） 来实现，不保证线程安全
+
+container包中包含三个主要的东西，一个是heap 定义了一些接口，需要用户自己去实现，接口内部嵌入了sort包的中的接口。
+还有一个是link 双向链表，最后一个是ring
+</details>
+
 #### [Hash表](https://draveness.me/golang/docs/part2-foundation/ch03-datastructure/golang-hashmap/)
 
-#### golang 如何创建一个map
+##### golang 如何创建一个map
 
 字面量或者make
 
@@ -124,23 +134,9 @@ type StringHeader struct {
 
 需要转换为[]byte 类型进行修改，[]byte类型也可以转换为string 类型，都需要发生内存拷贝，因此为造成性能损失
 
-#### 如何实现栈和队列
 
-可以自己实现，但是一般来说有两种方法：
 
-1.  通过slice实现，入栈出栈可以使用切片来实现。但是有内存泄漏的风险
-2.  利用标准库里面的container/link（双向链表） 来实现，不保证线程安全
 
-container包中包含三个主要的东西，一个是heap 定义了一些接口，需要用户自己去实现，接口内部嵌入了sort包的中的接口。
-还有一个是link 双向链表，最后一个是ring
-
-#### 接口？有什么优劣之处？
-
-接口：抽象出来的模式或者说是约定，一系列函数签名的合集
-优点：非侵入式的，编码起来非常灵活，一般来说在项目开始的时候很难去定义需要哪些接口，go可以随着项目的进行来确定最终需要那些接口
-劣势: 相比与侵入式的接口而言，很难确定一个结构提实现了哪些接口，也很难确定哪些接口被实现了。可能存在名称冲突的问题。
-
-如果a接口中包含b，c两个接口，且b，c两个接口中有重名，那么在go1.14 之前会报编译错误，但是在go1.14中修复了这个错误。
 
 #### 函数
 
@@ -155,6 +151,21 @@ container包中包含三个主要的东西，一个是heap 定义了一些接口
 
 - go中的接口分为两种类型：runtime.iface(带有一组方法的接口)，runtime.eface(不带方法的接口)
 - 空接口interface{} != nil
+
+<details>
+<summary><strong>接口？有什么优劣之处？</strong></summary>
+
+接口：抽象出来的模式或者说是约定，一系列函数签名的合集
+优点：非侵入式的，编码起来非常灵活，一般来说在项目开始的时候很难去定义需要哪些接口，go可以随着项目的进行来确定最终需要那些接口
+劣势: 相比与侵入式的接口而言，很难确定一个结构提实现了哪些接口，也很难确定哪些接口被实现了。可能存在名称冲突的问题。
+
+如果a接口中包含b，c两个接口，且b，c两个接口中有重名，那么在go1.14 之前会报编译错误，但是在go1.14中修复了这个错误。
+
+</details>
+
+
+
+
 
 #### 反射
 
@@ -253,9 +264,61 @@ for ; hb != false; hv1, hb = <-ha {
 }
 ```
 
+#### defer & panic & recover
+
+![golang-new-defer](/Users/xingzheng/Note/part-time Job/img/2020-01-19-15794017184614-golang-new-defer.png)
+
+`defer` 关键字的实现主要依靠编译器和运行时的协作，我们总结一下本节提到的三种机制：
+
+- 堆上分配 · 1.1 ~ 1.12
+  - 编译期将 `defer` 关键字被转换 [`runtime.deferproc`](https://draveness.me/golang/tree/runtime.deferproc) 并在调用 `defer` 关键字的函数返回之前插入 [`runtime.deferreturn`](https://draveness.me/golang/tree/runtime.deferreturn)；
+  - 运行时调用 [`runtime.deferproc`](https://draveness.me/golang/tree/runtime.deferproc) 会将一个新的 [`runtime._defer`](https://draveness.me/golang/tree/runtime._defer) 结构体追加到当前 Goroutine 的链表头；
+  - 运行时调用 [`runtime.deferreturn`](https://draveness.me/golang/tree/runtime.deferreturn) 会从 Goroutine 的链表中取出 [`runtime._defer`](https://draveness.me/golang/tree/runtime._defer) 结构并依次执行；
+- 栈上分配 · 1.13
+  - 当该关键字在函数体中最多执行一次时，编译期间的 [`cmd/compile/internal/gc.state.call`](https://draveness.me/golang/tree/cmd/compile/internal/gc.state.call) 会将结构体分配到栈上并调用 [`runtime.deferprocStack`](https://draveness.me/golang/tree/runtime.deferprocStack)；
+- 开放编码 · 1.14 ~ 现在
+  - 编译期间判断 `defer` 关键字、`return` 语句的个数确定是否开启开放编码优化；
+  - 通过 `deferBits` 和 [`cmd/compile/internal/gc.openDeferInfo`](https://draveness.me/golang/tree/cmd/compile/internal/gc.openDeferInfo) 存储 `defer` 关键字的相关信息；
+  - 如果 `defer` 关键字的执行可以在编译期间确定，会在函数返回前直接插入相应的代码，否则会由运行时的 [`runtime.deferreturn`](https://draveness.me/golang/tree/runtime.deferreturn) 处理；
+
+我们在本节前面提到的两个现象在这里也可以解释清楚了：
+
+- 后调用的defer函数会先执行：
+  - 后调用的 `defer` 函数会被追加到 Goroutine `_defer` 链表的最前面；
+  - 运行 [`runtime._defer`](https://draveness.me/golang/tree/runtime._defer) 时是从前到后依次执行；
+- 函数的参数会被预先计算；
+  - 调用 [`runtime.deferproc`](https://draveness.me/golang/tree/runtime.deferproc) 函数创建新的延迟调用时就会立刻拷贝函数的参数，函数的参数不会等到真正执行时计算；
+
+**panic & recover**
+
+分析程序的崩溃和恢复过程比较棘手，代码不是特别容易理解。我们在本节的最后还是简单总结一下程序崩溃和恢复的过程：
+
+1. 编译器会负责做转换关键字的工作；
+   1. 将 `panic` 和 `recover` 分别转换成 [`runtime.gopanic`](https://draveness.me/golang/tree/runtime.gopanic) 和 [`runtime.gorecover`](https://draveness.me/golang/tree/runtime.gorecover)；
+   2. 将 `defer` 转换成 [`runtime.deferproc`](https://draveness.me/golang/tree/runtime.deferproc) 函数；
+   3. 在调用 `defer` 的函数末尾调用 [`runtime.deferreturn`](https://draveness.me/golang/tree/runtime.deferreturn) 函数；
+2. 在运行过程中遇到 [`runtime.gopanic`](https://draveness.me/golang/tree/runtime.gopanic) 方法时，会从 Goroutine 的链表依次取出 [`runtime._defer`](https://draveness.me/golang/tree/runtime._defer) 结构体并执行；
+3. 如果调用延迟执行函数时遇到了runtime.gorecover就会将_panic.recovered标记成 true 并返回panic的参数；
+   1. 在这次调用结束之后，[`runtime.gopanic`](https://draveness.me/golang/tree/runtime.gopanic) 会从 [`runtime._defer`](https://draveness.me/golang/tree/runtime._defer) 结构体中取出程序计数器 `pc` 和栈指针 `sp` 并调用 [`runtime.recovery`](https://draveness.me/golang/tree/runtime.recovery) 函数进行恢复程序；
+   2. [`runtime.recovery`](https://draveness.me/golang/tree/runtime.recovery) 会根据传入的 `pc` 和 `sp` 跳转回 [`runtime.deferproc`](https://draveness.me/golang/tree/runtime.deferproc)；
+   3. 编译器自动生成的代码会发现 [`runtime.deferproc`](https://draveness.me/golang/tree/runtime.deferproc) 的返回值不为 0，这时会跳回 [`runtime.deferreturn`](https://draveness.me/golang/tree/runtime.deferreturn) 并恢复到正常的执行流程；
+4. 如果没有遇到 [`runtime.gorecover`](https://draveness.me/golang/tree/runtime.gorecover) 就会依次遍历所有的 [`runtime._defer`](https://draveness.me/golang/tree/runtime._defer)，并在最后调用 [`runtime.fatalpanic`](https://draveness.me/golang/tree/runtime.fatalpanic) 中止程序、打印 `panic` 的参数并返回错误码 2；
+
+分析的过程涉及了很多语言底层的知识，源代码阅读起来也比较晦涩，其中充斥着反常规的控制流程，通过程序计数器来回跳转，不过对于我们理解程序的执行流程还是很有帮助。
+
+#### make & new
+
+- `make` 的作用是初始化内置的数据结构，也就是我们在前面提到的切片、哈希表和 Channel；
+- `new` 的作用是根据传入的类型分配一片内存空间并返回指向这片内存空间的指针]；
+- 
+
+### 进阶
+
+#### Context
 
 
-### GC
+
+#### GC
 
 ### 标准库
 
