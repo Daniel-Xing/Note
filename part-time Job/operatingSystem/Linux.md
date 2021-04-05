@@ -328,5 +328,19 @@ EDITOR=vim crontab -e // 指定编辑器为vim，使用export导入环境变量
 
 
 
-### 
+## 网络
+
+### IO模型
+
+[**Linux IO模式及 select、poll、epoll详解**](https://segmentfault.com/a/1190000003063859)
+
+阻塞调用，非阻塞调用，IO模型
+
+[**Linux下的I/O复用与epoll详解**](https://www.cnblogs.com/lojunren/p/3856290.html)
+
+[**select、poll、epoll之间的区别总结**](https://www.cnblogs.com/Anker/p/3265058.html)
+
+select/poll : 每次都会将fd列表拷贝进入内存，内核检查是否有就绪的fd并返回
+
+epoll ： 内核维护一个事件列表，不需要每次copy所有的fd
 
