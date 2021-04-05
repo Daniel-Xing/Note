@@ -6,6 +6,12 @@
 
 #### mysql索引/sql优化
 
+#### mysql Join
+
+Mysql只支持Nested Loop Join，不支持其他数据库提供的Hash Join & sort- Merge Join
+
+因此，在多表进行Join的过程中，对于被驱动表的Join的列建立索引可以有效的优化开销 
+
 #### mysql 如何存储数据
 
 #### mysql事务
@@ -46,4 +52,3 @@ SQL 标准定义了四种隔离级别，MySQL 全都支持。这四种隔离级�
 ![img](../part-time Job/img/v2-2e1a7203478165890e2d09f36cb39857_1440w.png)
 
 只有串行化的隔离级别解决了全部这 3 个问题，其他的 3 个隔离级别都有缺陷。
-
