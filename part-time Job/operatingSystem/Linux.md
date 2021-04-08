@@ -344,3 +344,23 @@ select/poll : 每次都会将fd列表拷贝进入内存，内核检查是否有�
 
 epoll ： 内核维护一个事件列表，不需要每次copy所有的fd
 
+## Docker
+
+### NameSpace
+
+用作命名空间的隔离，主要隔离进程的pid、网络等等
+
+### Cgroup
+
+用作物理资源的隔离，通过在/sys/fs/cgroup/*下的文件夹内创建文件加，实现对进程的资源隔离
+
+### AUFS
+
+将多个目录mount到一个挂载点下，只对第一个目录具有写权限，对任意只读文件夹下任意一个文件进行写操作，都会将文件copy到最上层。删除只读层文件的时候，在最上层创建.wh文件来隐藏
+
+### 博客
+
+- [docker核心技术和实现原理](https://draveness.me/docker/)
+
+- [理解docker系列](https://www.cnblogs.com/sammyliu/default.html?page=8)
+

@@ -9,7 +9,7 @@
 1. 当元素数量小于或者等于 4 个时，会直接将数组中的元素放置在栈上；
 2. 当元素数量大于 4 个时，会将数组中的元素放置到静态区并在运行时取出；
 
-#### [Slice](https://draveness.me/golang/docs/part2-foundation/ch03-datastructure/golang-array-and-slice/)
+#### [Slice](https://draveness.me/golang/docs/part2-foundation/ch03-datastructure/golang-array-and-slice/)[<sup>1</sup>](#refer)
 
 slice是一个结构体，在数组上提供了一层抽象
 
@@ -594,7 +594,9 @@ GDB的一些常用命令如下所示
 
 
 
+<div id ="refer"></div>
 
+## Reference
 
-
+[1] [go语言设计与实现](https://draveness.me/golang/)
 
