@@ -128,6 +128,8 @@ container包中包含三个主要的东西，一个是heap 定义了一些接口
 - 拉链法：用链表来存储冲突的元素
   - 装载因子 = 元素数量/桶的数量
 
+TODO: map的实现
+
 #### String
 
 不可变字符串，结构如下
@@ -140,8 +142,6 @@ type StringHeader struct {
 ```
 
 需要转换为[]byte 类型进行修改，[]byte类型也可以转换为string 类型，都需要发生内存拷贝，因此为造成性能损失
-
-
 
 
 
@@ -459,7 +459,35 @@ type waitq struct {
 
 [`runtime.sudog`](https://draveness.me/golang/tree/runtime.sudog) 表示一个在等待列表中的 Goroutine，该结构中存储了两个分别指向前后 [`runtime.sudog`](https://draveness.me/golang/tree/runtime.sudog) 的指针以构成链表。
 
-#### GC
+#### GMP模型
+
+##### 原理
+
+- G：goroutinues go协程，待执行的任务
+- M：线程，由操作系统管理和调度
+- P：处理器，可被看作是运行在线程上的调度器
+
+P管理着一个G的队列，当P和M绑定时，P可以从本地G队列中选择一个绑定到M上执行。同时，也存在着一个全局的G的队列。
+
+- 对于全局的G，需要加锁进行保护
+- 对于本地的G，不需要加锁
+
+##### 触发调度的时机
+
+![schedule-points](./img/2020-02-05-15808864354679-schedule-points.png)
+
+- 主动挂起 — [`runtime.gopark`](https://draveness.me/golang/tree/runtime.gopark) -> [`runtime.park_m`](https://draveness.me/golang/tree/runtime.park_m)
+- 系统调用 — [`runtime.exitsyscall`](https://draveness.me/golang/tree/runtime.exitsyscall) -> [`runtime.exitsyscall0`](https://draveness.me/golang/tree/runtime.exitsyscall0)
+- 协作式调度 — [`runtime.Gosched`](https://draveness.me/golang/tree/runtime.Gosched) -> [`runtime.gosched_m`](https://draveness.me/golang/tree/runtime.gosched_m) -> [`runtime.goschedImpl`](https://draveness.me/golang/tree/runtime.goschedImpl)
+- 系统监控 — [`runtime.sysmon`](https://draveness.me/golang/tree/runtime.sysmon) -> [`runtime.retake`](https://draveness.me/golang/tree/runtime.retake) -> [`runtime.preemptone`](https://draveness.me/golang/tree/runtime.preemptone)
+
+**常见面试问题**：
+
+- Q：for死循环会怎么样？
+  - 早期不是基于信号的抢占的版本中（1.14之前），若执行for{i++}，则永远也无法被调度。基于信号的抢占之后，‘首先注册绑定 SIGURG 信号及处理方法runtime.doSigPreempt，sysmon会间隔性检测超时的p，然后发送信号，m收到信号后休眠执行的goroutine并且进行重新调度’
+- 
+
+#### 内存分配 & GC
 
 ### 标准库
 
