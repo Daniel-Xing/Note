@@ -473,7 +473,7 @@ P管理着一个G的队列，当P和M绑定时，P可以从本地G队列中选�
 
 ##### 触发调度的时机
 
-![schedule-points](./img/2020-02-05-15808864354679-schedule-points.png)
+![schedule-points](../img/2020-02-05-15808864354679-schedule-points.png)
 
 - 主动挂起 — [`runtime.gopark`](https://draveness.me/golang/tree/runtime.gopark) -> [`runtime.park_m`](https://draveness.me/golang/tree/runtime.park_m)
 - 系统调用 — [`runtime.exitsyscall`](https://draveness.me/golang/tree/runtime.exitsyscall) -> [`runtime.exitsyscall0`](https://draveness.me/golang/tree/runtime.exitsyscall0)
@@ -486,7 +486,11 @@ P管理着一个G的队列，当P和M绑定时，P可以从本地G队列中选�
   - 早期不是基于信号的抢占的版本中（1.14之前），若执行for{i++}，则永远也无法被调度。基于信号的抢占之后，‘首先注册绑定 SIGURG 信号及处理方法runtime.doSigPreempt，sysmon会间隔性检测超时的p，然后发送信号，m收到信号后休眠执行的goroutine并且进行重新调度’
 - 
 
-#### 内存分配 & GC
+### 内存分配 
+
+#### 堆内存分配
+
+#### 垃圾回收
 
 [参考答案](https://draveness.me/golang/docs/part3-runtime/ch07-memory/golang-garbage-collector/#标记清除)
 
@@ -552,6 +556,8 @@ writePointer(slot, ptr):
 2. `gcTriggerTime` — 如果一定时间内没有触发，就会触发新的循环，该出发条件由 [`runtime.forcegcperiod`](https://draveness.me/golang/tree/runtime.forcegcperiod) 变量控制，默认为 2 分钟；
 3. `gcTriggerCycle` — 如果当前没有开启垃圾收集，则触发新的循环；
 
+#### 栈内存分配
+
 ### 标准库
 
 #### math
@@ -565,6 +571,8 @@ writePointer(slot, ptr):
 ### 面经
 
 #### channel的实现
+
+
 
 #### golang 的GMP模型
 

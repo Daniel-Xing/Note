@@ -63,7 +63,9 @@
 
 ### DNS
 
+#### 概念
 
+#### 查找过程
 
 ### HTTP
 
@@ -301,9 +303,19 @@ Http协议定义了很多与服务器交互的方法，最基本的有4种，分
 
 ##### time_wait的时间以及查看timeWait的命令
 
+#### 滑动窗口的大小由哪一端来控制？server为什么要控制？client为什么要控制？
 
+#### 拥塞控制知道吗？
 
 ### 其他
+
+#### cookies和session的区别
+
+#### session如何存储
+
+#### 分布式session如何实现？
+
+#### 将session储存在[客户端](https://www.nowcoder.com/jump/super-jump/word?word=客户端)这种方法吗？有什么好处？有什么坏处?
 
 #### 浏览器输入URL后经过了哪些过程
 
@@ -317,3 +329,7 @@ Http协议定义了很多与服务器交互的方法，最基本的有4种，分
 6.关闭TCP连接；
 7.浏览器解析HTML；
 8.浏览器布局渲染；
+
+
+
+#### 启动一个应用，监听一个端口对外服务？启动服务以后，本身没有问题，但是[客户端](https://www.nowcoder.com/jump/super-jump/word?word=客户端)连不到服务？如何诊断？

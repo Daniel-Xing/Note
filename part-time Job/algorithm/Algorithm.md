@@ -10,6 +10,12 @@
 
 [红黑树原理讲解](https://www.jianshu.com/p/e136ec79235c)
 
+### 图
+
+#### 图的存储（优点缺点）
+
+#### 图的遍历算法
+
 ## 排序算法
 
 [go实现多种排序算法](https://zhuanlan.zhihu.com/p/320419705)
@@ -125,3 +131,30 @@ func (numbers uint64Slice)swap(i,j int)  {
 ```
 
 ### 计数排序
+
+## Leetcode
+
+- ***[算法题](https://www.nowcoder.com/jump/super-jump/word?word=算法题)\****：用栈实现队列（Leetcode）其中栈的数据结构也自己实现*
+- leetcode 32
+- *[算法题](https://www.nowcoder.com/jump/super-jump/word?word=算法题)：无重复字符的最长子串（[leetcode](https://www.nowcoder.com/jump/super-jump/word?word=leetcode)）*
+- ***[算法题](https://www.nowcoder.com/jump/super-jump/word?word=算法题)\****：对无序的[链表](https://www.nowcoder.com/jump/super-jump/word?word=链表)进行[排序](https://www.nowcoder.com/jump/super-jump/word?word=排序)（不可以使用Java中的容器）
+- ***[算法题](https://www.nowcoder.com/jump/super-jump/word?word=算法题)\****：下一个排列（Leetcode）*
+
+## 面经问题
+
+### 找出两个文件中相同的行，数据量小时和数据量大时分别怎么做？
+
+作者：酱天小禽兽
+链接：https://www.nowcoder.com/discuss/626825
+来源：牛客网
+
+回答的是：内存够的话直接用hashMap，否则哈希取模分解到若干个小文件，分治处理） 
+
+  19.1 面试官半天都没有理解我的意思，解释了大概十分钟。。可能不是面试官想要的方法吧。 
+
+   19.2 你这个方法读写操作有点多，能优化下吗？ 
+
+  19.3 能用布隆过滤器吗?（回答的是 布隆过滤器只能判断不存在，不能准确判断是否存在） 
+
+  19.4 那能用布隆过滤器优化吗？（想了想，可以用布隆先简单过滤一次吧，然后说了思路）
+

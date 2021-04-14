@@ -326,7 +326,11 @@ EDITOR=vim crontab -e // 指定编辑器为vim，使用export导入环境变量
 
 ![image-20210303133240816](/Users/xingzheng/Library/Application Support/typora-user-images/image-20210303133240816.png)
 
+## 虚拟内存
 
+#### 概念
+
+#### 为什么要使用虚拟内存
 
 ## 进程和线程
 
@@ -355,6 +359,8 @@ EDITOR=vim crontab -e // 指定编辑器为vim，使用export导入环境变量
 - 线程共享同一个进程的内存因此主要是控制好并发就好
 - 锁：互斥锁，读写锁
 - 信号量：
+
+### 调度
 
 ### 死锁
 
@@ -475,4 +481,8 @@ epoll ： 内核维护一个事件列表，不需要每次copy所有的fd
 #### 死锁的判断和预防
 
 ### 网络
+
+### 其他
+
+#### 一个指令从软件到操作系统到硬件执行？整个过程做了哪些？
 
