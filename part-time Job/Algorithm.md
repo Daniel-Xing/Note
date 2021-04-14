@@ -25,7 +25,46 @@
 - 用一个flag来判断是否发生交换，如果没有，直接break
 - 内层循环不需要遍历到结尾
 
+### 归并排序
+
+分治
+
+
+
 ### 快速排序
+
+每次选取开头的元素并进行比较，双指针交换，将比基准元素小的都放在左边，将比基准元素大的都放在右边
+
+```go
+func quickSort(nums []int) {
+  sort(nums, 0, len(nums)-1)
+}
+
+func sort(nums []int, lBounce, rBounce int) {
+  if lBounce >= rBounce {
+    return
+  }
+  base := nums[lBouce]
+  left, right := lBounce +1, rBounce
+  for {
+    for nums[left] <= base {
+      left ++
+    }
+    for nums[right] > base {
+      right++
+    }
+    if left >= right {
+      break
+    }
+    nums[left], nums[right] = nums[right], nums[left]
+  }
+  nums[lBounce], nums[right] = nums[right], nums[lBounce]
+  sort(nums, lBounce, right -1)
+  sort(nums, left, rBounce)
+}
+```
+
+
 
 ### 堆排序
 
