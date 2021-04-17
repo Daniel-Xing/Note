@@ -8,7 +8,7 @@
 
 七层网络模型：
 
-![preview](./img/view.png)
+![preview](../img/view.png)
 
 ### TCP/UDP
 
@@ -25,11 +25,11 @@
 
 #### **TCP报文段格式**
 
-![preview](./img/tcp格式.png)
+![preview](../img/tcp格式.png)
 
 #### **三次握手**
 
-![三次握手过程.png](./img/bVbE4UW.png)
+![三次握手过程.png](../img/bVbE4UW.png)
 
 1. 客户端向服务器发送连接请求报文，设置报文段SYN = 1，初始化seq = x。发送完毕之后，客户端进入到SYN-SENT阶段，表示报文已经发送。
 2. 服务器监听端口，接收到请求报文，并返回一个请求确认报文。设置报文段SYN = 1， ACK =1， ack = x +1, seq = y ,随后，服务器进入到SYN-RECIEVED
@@ -37,19 +37,19 @@
 
 #### **四次挥手**
 
-![四次挥手过程.png](./img/bVbE4Va.png)
+![四次挥手过程.png](../img/bVbE4Va.png)
 
 
 
 #### **流量控制**
 
-![preview](./img/流量控制.png)
+![preview](../img/流量控制.png)
 
-![发送缓存字节 分类.png](./img/bVbE4VD.png)
+![发送缓存字节 分类.png](../img/bVbE4VD.png)
 
 #### **拥塞控制**
 
-![preview](./img/拥塞控制.png)
+![preview](../img/拥塞控制.png)
 
 ##### [TCP的拥塞控制带来的性能问题](https://draveness.me/whys-the-design-tcp-performance/)
 
@@ -73,11 +73,15 @@
 
 **请求消息格式**
 
-![image-20210410185908903](./img/image-20210410185908903.png)
+![image-20210410185908903](../img/image-20210410185908903.png)
 
 **回复消息**
 
-![image-20210410190024891](./img/image-20210410190024891.png)
+![image-20210410190024891](../img/image-20210410190024891.png)
+
+#### HTTP2.0
+
+[HTTP2.0基本知识](https://www.zhihu.com/question/34074946)
 
 ### HTTPS
 
@@ -87,11 +91,11 @@
 
 ### JWT
 
-![preview](/Users/xingzheng/Note/part-time Job/v2-f1556c71042566d4a6f69ee20c2870ae_r.png)
+![preview](../img/v2-f1556c71042566d4a6f69ee20c2870ae_r.png)
 
 
 
-
+### 
 
 ## 面经问题
 
@@ -99,7 +103,7 @@
 
 #### https中ssl建立连接的过程
 
-![preview](./img/ssl.png)
+![preview](../img/ssl.png)
 
 > SSL / TLS 握手详细过程
 
@@ -119,7 +123,7 @@
 
 #### https握手流程
 
-![HTTPS 加密、解密、验证及数据传输过程.png](./img/bVbClUl.png)
+![HTTPS 加密、解密、验证及数据传输过程.png](../img/bVbClUl.png)
 
 #### HTTPS为什么要用对称加密+非对称加密+CA机构 
 

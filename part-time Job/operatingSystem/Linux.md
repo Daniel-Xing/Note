@@ -207,6 +207,41 @@ Linux系统中使用以下命令来查看文件的内容：
 - head 只看头几行
 - tail 只看尾巴几行
 
+### 网络
+
+#### netstat
+
+```
+netstat [-acCeFghilMnNoprstuvVwx][-A<网络类型>][--ip]
+```
+
+**参数说明**：
+
+- -a或--all   显示所有连线中的Socket。
+- -A<网络类型>或--<网络类型>   列出该网络类型连线中的相关地址。
+- -c或--continuous   持续列出网络状态。
+- -C或--cache   显示路由器配置的快取信息。
+- -e或--extend   显示网络其他相关信息。
+- -F或--fib   显示路由缓存。
+- -g或--groups   显示多重广播功能群组组员名单。
+- -h或--help   在线帮助。
+- -i或--interfaces   显示网络界面信息表单。
+- -l或--listening   显示监控中的服务器的Socket。
+- -M或--masquerade   显示伪装的网络连线。
+- -n或--numeric   直接使用IP地址，而不通过域名服务器。
+- -N或--netlink或--symbolic   显示网络硬件外围设备的符号连接名称。
+- -o或--timers   显示计时器。
+- -p或--programs   显示正在使用Socket的程序识别码和程序名称。
+- -r或--route   显示Routing Table。
+- -s或--statistics   显示网络工作信息统计表。
+- -t或--tcp   显示TCP传输协议的连线状况。
+- -u或--udp   显示UDP传输协议的连线状况。
+- -v或--verbose   显示指令执行过程。
+- -V或--version   显示版本信息。
+- -w或--raw   显示RAW传输协议的连线状况。
+- -x或--unix   此参数的效果和指定"-A unix"参数相同。
+- --ip或--inet   此参数的效果和指定"-A inet"参数相同。
+
 ### 磁盘管理
 
 #### df
@@ -334,7 +369,24 @@ EDITOR=vim crontab -e // 指定编辑器为vim，使用export导入环境变量
 
 ## 进程和线程
 
-- fork 和 clone的实现原理
+### fork & exec
+
+#### fork
+
+fork 系统调用创建新的进程，有以下几种特点：
+
+- 返回两次：在父进程中返回的是子进程的pid，在子进程中返回的是0，若失败返回-1，并设置erron
+- 从内核的的角度说，会在内核进程表项中创建新的项，并且与原进程大部分相同
+- 完全拷贝父进程代码和数据，使用写时复制
+- 父进程文件描述符在子进程中默认打卡
+
+#### exec
+
+在进程中执行新的程序，替换进程印象。exec下的原代码不会执行
+
+### 僵尸进程
+
+
 
 ### 区别
 
