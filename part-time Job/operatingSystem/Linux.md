@@ -579,11 +579,70 @@ TODO：每种锁的优缺点以及应用场景
 
 在一段时间内，监听用户感兴趣的文件描述符上的可读、可写和异常等事件
 
+**API**
 
+```c
+#include<sys/select.h>
+
+int select (int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
+```
+
+- nfds 描述文件描述符总数
+- 后面三个参数描述可读、可写和异常文件描述符
+- timeout指定超时时间
+
+**文件描述符就绪状态**
+
+![image-20210419211139783](/Users/xingzheng/Note/part-time Job/img/image-20210419211139783.png)
 
 ##### poll
 
+**API**
+
+```c
+int poll (struct pollfd *fds, unsigned int nfds, int timeout);
+```
+
+**特点**
+
+不同与select使用三个位图来表示三个fdset的方式，poll使用一个 pollfd的指针实现。
+
+```c
+struct pollfd {
+    int fd; /* file descriptor */
+    short events; /* requested events to watch */
+    short revents; /* returned events witnessed */
+};
+```
+
+pollfd结构包含了要监视的event和发生的event，不再使用select“参数-值”传递的方式。同时，pollfd并没有最大数量限制（但是数量过大后性能也是会下降）。 和select函数一样，poll返回后，需要轮询pollfd来获取就绪的描述符。
+
 ##### epoll
+
+- epoll 使用一组函数而不是一个函数
+- epoll将用户感兴趣的文件描述符的事件放在内核维护的一个事件表内
+  - 用户无需每次都将所有的文件描述符传入内核
+  - 需要一个单独的文件描述符来描述这个事件表
+  - 实现使用红黑树
+
+**API**
+
+```c
+int epoll_create(int size)；//创建一个epoll的句柄，size用来告诉内核这个监听的数目一共有多大
+int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)；
+int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout);
+```
+
+- Epoll_wait 返回就绪的文件描述符个数
+  - epoll_wait 如果检测到事件，就将就绪事件从内核事件表拷贝到event指向数组中
+
+**LT & ET 模式**
+
+LT模式下，epoll_wait返回的就绪事件可以不被立即处理，在下次调用时仍然会返回。但是在ET模式下，用户程序必须立即处理，下次调用不会返回。
+
+##### 三者的对比
+
+![image-20210420155739230](/Users/xingzheng/Note/part-time Job/img/image-20210420155739230.png)
 
 ##### 参考文献
 
