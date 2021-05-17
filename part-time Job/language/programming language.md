@@ -170,9 +170,10 @@ type StringHeader struct {
 
 </details>
 
-
-
-
+|                      | 结构体实现接口 | 结构体指针实现接口 |
+| :------------------: | :------------: | ------------------ |
+|   结构体初始化变量   |      通过      | 不通过             |
+| 结构体指针初始化变量 |      通过      | 通过               |
 
 #### 反射
 
@@ -555,7 +556,7 @@ writePointer(slot, ptr):
 
 ```go
 writePointer(slot, ptr):
-    shade(ptr)
+    shade(*slot)
     *slot = ptr
 ```
 

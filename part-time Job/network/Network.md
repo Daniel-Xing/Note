@@ -323,6 +323,8 @@ Http协议定义了很多与服务器交互的方法，最基本的有4种，分
 
 #### 浏览器输入URL后经过了哪些过程
 
+[](https://github.com/skyline75489/what-happens-when-zh_CN)
+
 [参考答案](https://segmentfault.com/a/1190000012092552)
 
 1.DNS域名解析；
