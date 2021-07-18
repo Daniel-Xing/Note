@@ -39,4 +39,4 @@ B+ 树的优点在于：由于B+树在内部节点上不包含数据信息，因
 
 [skip-list](https://15721.courses.cs.cmu.edu/spring2018/papers/08-oltpindexes1/pugh-skiplists-cacm1990.pdf)
 
-![image-20210416162942024](/Users/xingzheng/Note/part-time Job/img/image-20210416162942024.png)
+![image-20210416162942024](../img/image-20210416162942024.png)
