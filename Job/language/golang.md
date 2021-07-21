@@ -612,11 +612,152 @@ writePointer(slot, ptr):
 
 由分段栈变为连续栈，栈在运行时需要动态扩容和缩容
 
-## 性能调优
+## 性能优化
 
 ### pprof
 
 ### trace
+
+#### String & []Byte
+
+##### 尽量避免[]byte 和 string相互转换
+
+原因在于标准的转换实现都是内存分配+数据拷贝，非常耗费时间
+
+- 尽量避免[]byte和string的互相转换，go的string是不可变类型，标准实现中和[]byte的互转均为值拷贝
+- **多数场景下**都可以优先选择强转换方式进行互转，**但只适合于只读的情况**
+- **风险**：string强转换后得到的[]byte会fatal error，因为只做了指针转换，这个值还是不可写的
+- **风险**：通过强转[]byte得到的string，如果原始[]byte被修改，string的值也对应改变
+
+```go
+//强转换
+func stringToBytes(s string) []byte {
+   x := (*[2]uintptr)(unsafe.Pointer(&s))
+   b := [3]uintptr{x[0], x[1], x[1]}
+   return *(*[]byte)(unsafe.Pointer(&b))
+}
+
+func bytesToString(b []byte) string {
+   return *(*string)(unsafe.Pointer(&b))
+}
+```
+
+Benchmark
+
+```sh
+goos: darwin
+goarch: amd64
+pkg: code.byted.org/videoarch/play/tool_kit/optimize
+Benchmark_bytesToString    1000000000    0.262 ns/op     0 B/op    0 allocs/op
+Benchmark_toString         13166526      84.7 ns/op    512 B/op    1 allocs/op
+Benchmark_stringToBytes    1000000000    0.251 ns/op     0 B/op    0 allocs/op
+Benchmark_toBytes          12615364      92.9 ns/op    512 B/op    1 allocs/op
+```
+
+标准转换实现
+
+```go
+/** 基本结构体定义 **/
+
+// slice定义 (src/runtime/slice.go)
+type slice struct {
+    array unsafe.Pointer
+    len   int
+    cap   int
+}
+
+// string定义 (src/runtime/string.go)
+type stringStruct struct {
+    str unsafe.Pointer
+    len int
+}
+
+// string str指向的类型
+func gostringnocopy(str *byte) string {
+   ss := stringStruct{str: unsafe.Pointer(str), len: findnull(str)}
+   s := *(*string)(unsafe.Pointer(&ss))
+   return s
+}
+
+/** 标准转换实现 **/
+// src/runtime/string.go
+const tmpStringBufSize = 32
+type tmpBuf [tmpStringBufSize]byte
+
+func stringtoslicebyte(buf *tmpBuf, s string) []byte {
+   var b []byte
+   if buf != nil && len(s) <= len(buf) {
+      *buf = tmpBuf{}
+      b = buf[:len(s)]
+   } else {
+      b = rawbyteslice(len(s)) 
+   }
+   copy(b, s)
+   return b
+}
+
+// Copy实现
+func slicestringcopy(toPtr *byte, toLen int, fm string) int {
+   //一些条件判断code...
+   n := len(fm)
+   memmove(unsafe.Pointer(toPtr), stringStructOf(&fm).str, uintptr(n))
+   return n
+}
+
+// string([]byte) 实现
+func slicebytetostring(buf *tmpBuf, b []byte) (str string) {
+    //一些条件判断code...
+    var p unsafe.Pointer
+    if buf != nil && len(b) <= len(buf) {
+        p = unsafe.Pointer(buf)
+    } else {
+        p = mallocgc(uintptr(len(b)), nil, false)
+    }
+    stringStructOf(&str).str = p
+    stringStructOf(&str).len = len(b)
+    //拷贝字节数组至字符串
+    memmove(p, (*(*slice)(unsafe.Pointer(&b))).array, uintptr(len(b)))
+    return
+}
+```
+
+##### 拼接
+
+拼接时候建议使用string.Builder 和 Join来实现，Join内部也是使用Builder实现的
+
+[高效拼接测试 一](https://www.flysnow.org/2018/10/28/golang-concat-strings-performance-analysis.html)      [高效拼接测试 二](https://www.flysnow.org/2018/11/05/golang-concat-strings-performance-analysis.html)    [高效拼接测试 三](https://www.flysnow.org/2018/11/11/golang-concat-strings-performance-analysis.html)
+
+#### map和syncMap
+
+- 简单的读多写少场景下，读写分离的syncMap虽然内存分配次数更多，但性能一般好于map+全局rwmutex
+
+#### 正则化&JSON序列化
+
+- 尽量不用，把正则替换为其他等价字符串操作，必须要用把正则表达式提前编译一下会有数十倍提升，做到这一点基本就够了
+
+```go
+var phone = "^1[3-9]\d{9}$"
+var r = regexp.MustCompile(phone)
+
+func Benchmark_re1(b *testing.B) {
+   for i := 0; i < b.N; i++ {
+      regexp.MatchString(phone, "13912345678")
+   }
+}
+
+func Benchmark_re2(b *testing.B) {
+   for i := 0; i < b.N; i++ {
+      r.MatchString("13912345678")
+   }
+}
+
+/** benchmark **/
+goos: darwin
+goarch: amd64
+pkg: code.byted.org/videoarch/play/tool_kit/optimize
+Benchmark_re1     215503       5065 ns/op     5090 B/op     66 allocs/op
+Benchmark_re2     8692704       136 ns/op        0 B/op      0 allocs/op
+```
 
 ## 标准库
 
