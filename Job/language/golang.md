@@ -1,15 +1,15 @@
-# Programming Language
+## Programming Language
 
-## Golang
+# Golang
 
-### 基础
+## 基础
 
-#### Array 
+### Array 
 
 1. 当元素数量小于或者等于 4 个时，会直接将数组中的元素放置在栈上；
 2. 当元素数量大于 4 个时，会将数组中的元素放置到静态区并在运行时取出；
 
-#### [Slice](https://draveness.me/golang/docs/part2-foundation/ch03-datastructure/golang-array-and-slice/)[<sup>1</sup>](#refer)
+### [Slice](https://draveness.me/golang/docs/part2-foundation/ch03-datastructure/golang-array-and-slice/)[<sup>1</sup>](#refer)
 
 slice是一个结构体，在数组上提供了一层抽象
 
@@ -24,7 +24,7 @@ type SliceHeader struct {
 ```
 
 
-##### 拷贝
+#### 拷贝
 
 ```go
 copy(a,b)
@@ -65,7 +65,7 @@ func slicecopy(to, fm slice, width uintptr) int {
 // TODO： Mememove实现？
 ```
 
-##### [扩容](https://juejin.cn/post/6844903812331732999)
+#### [扩容](https://juejin.cn/post/6844903812331732999)
 
 扩容会发生在slice append的时候，当slice的cap不足以容纳新元素，就会进行growSlice。
 
@@ -115,9 +115,9 @@ container包中包含三个主要的东西，一个是heap 定义了一些接口
 还有一个是link 双向链表，最后一个是ring
 </details>
 
-#### [Hash表](https://draveness.me/golang/docs/part2-foundation/ch03-datastructure/golang-hashmap/)
+### [Hash表](https://draveness.me/golang/docs/part2-foundation/ch03-datastructure/golang-hashmap/)
 
-##### golang 如何创建一个map
+#### golang 如何创建一个map
 
 字面量或者make
 
@@ -130,7 +130,7 @@ container包中包含三个主要的东西，一个是heap 定义了一些接口
 
 **TODO**: map的实现
 
-#### String
+### String
 
 不可变字符串，结构如下
 
@@ -145,14 +145,20 @@ type StringHeader struct {
 
 
 
-#### 函数
+### 函数
 
 函数是一等公民：
 
 - c语言函数传递参数和返回值使用寄存器和栈共同来操作，返回值只使用一个栈，所以不支持多返回值。GO语言使用栈来进行参数的传递与返回，只需要在栈上多分配一些空间即可实现多返回值，但是牺牲了性能。
 - go语言值拷贝，传递大的结构体的时候注意使用指针传递； 结构体在内存中是连续的一块区域，指针指向结构体顶部。
 
-#### 接口
+#### 闭包
+
+[闭包解释](https://zhuanlan.zhihu.com/p/92634505) **闭包**是由**函数**和与其相关的引用**环境**组合而成的实体 。
+
+**延迟绑定**：在闭包被声明的时候会保存相关的环境，在真正执行的时候才会去读相关环境的值。
+
+### 接口
 
 接口是一些方法签名的集合； 鸭子类型，实现接口的时候不需要指定，在特定时候会进行类型转换进行Check；
 
@@ -161,7 +167,6 @@ type StringHeader struct {
 
 <details>
 <summary><strong>接口？有什么优劣之处？</strong></summary>
-
 接口：抽象出来的模式或者说是约定，一系列函数签名的合集
 优点：非侵入式的，编码起来非常灵活，一般来说在项目开始的时候很难去定义需要哪些接口，go可以随着项目的进行来确定最终需要那些接口
 劣势: 相比与侵入式的接口而言，很难确定一个结构提实现了哪些接口，也很难确定哪些接口被实现了。可能存在名称冲突的问题。
@@ -175,11 +180,11 @@ type StringHeader struct {
 |   结构体初始化变量   |      通过      | 不通过             |
 | 结构体指针初始化变量 |      通过      | 通过               |
 
-#### 反射
+### 反射
 
 反射给Go提供了元编程的能力；Go中的反射主要集中于两种reflect.Type 和reflect.Value，可以使用提供的reflect.TypeOf和reflect.ValueOf来获取变量类型。
 
-#### for range
+### for range
 
 ```go
 // 第一个例子
@@ -272,7 +277,7 @@ for ; hb != false; hv1, hb = <-ha {
 }
 ```
 
-#### defer & panic & recover
+### defer & panic & recover
 
 ![golang-new-defer](/Users/xingzheng/Note/part-time Job/img/2020-01-19-15794017184614-golang-new-defer.png)
 
@@ -314,14 +319,14 @@ for ; hb != false; hv1, hb = <-ha {
 
 分析的过程涉及了很多语言底层的知识，源代码阅读起来也比较晦涩，其中充斥着反常规的控制流程，通过程序计数器来回跳转，不过对于我们理解程序的执行流程还是很有帮助。
 
-#### make & new
+### make & new
 
 - `make` 的作用是初始化内置的数据结构，也就是我们在前面提到的切片、哈希表和 Channel；
 - `new` 的作用是根据传入的类型分配一片内存空间并返回指向这片内存空间的指针；
 
-### 调度
+## 调度
 
-#### Context
+### Context
 
 [context 详解](https://www.cnblogs.com/qcrao-2018/p/11007503.html)
 
@@ -341,7 +346,7 @@ type Context interface {
 - 协调多个goroutines，取消一个context时，同级别的context或者子context都会被取消
 - 本质上是类似于一个链表结构，取消操作的复杂度是O(n)。由于加了锁，所以context是线程安全的
 
-#### 同步原语
+### 同步原语
 
 [同步 - go语言设计与实现](https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-sync-primitives/)
 
@@ -417,7 +422,7 @@ type RWMutex struct {
 
 [`golang/sync/errgroup.Group`](https://draveness.me/golang/tree/golang/sync/errgroup.Group)、[`golang/sync/semaphore.Weighted`](https://draveness.me/golang/tree/golang/sync/semaphore.Weighted) 和 [`golang/sync/singleflight.Group`](https://draveness.me/golang/tree/golang/sync/singleflight.Group)
 
-#### channel
+### channel
 
 [chanel - go语言设计与实现](https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-channel/#643-创建管道)
 
@@ -459,9 +464,9 @@ type waitq struct {
 
 [`runtime.sudog`](https://draveness.me/golang/tree/runtime.sudog) 表示一个在等待列表中的 Goroutine，该结构中存储了两个分别指向前后 [`runtime.sudog`](https://draveness.me/golang/tree/runtime.sudog) 的指针以构成链表。
 
-#### GMP模型
+### GMP模型
 
-##### 原理
+#### 原理
 
 - G：goroutinues go协程，待执行的任务
 - M：线程，由操作系统管理和调度
@@ -472,7 +477,7 @@ P管理着一个G的队列，当P和M绑定时，P可以从本地G队列中选�
 - 对于全局的G，需要加锁进行保护
 - 对于本地的G，不需要加锁
 
-##### 触发调度的时机
+#### 触发调度的时机
 
 ![schedule-points](../img/2020-02-05-15808864354679-schedule-points.png)
 
@@ -487,11 +492,11 @@ P管理着一个G的队列，当P和M绑定时，P可以从本地G队列中选�
   - 早期不是基于信号的抢占的版本中（1.14之前），若执行for{i++}，则永远也无法被调度。基于信号的抢占之后，‘首先注册绑定 SIGURG 信号及处理方法runtime.doSigPreempt，sysmon会间隔性检测超时的p，然后发送信号，m收到信号后休眠执行的goroutine并且进行重新调度’
 - 
 
-### 内存分配 
+## 内存分配 
 
 当我们谈论内存分配的时候，主要谈论的是两块，堆内存是怎么分配的，栈内存是怎么分配的。对于堆内存而言，我们还需要讨论的是，内存的回收。对于栈内存而言，由于运行时会动态的入栈和出栈，因此不需要去回收内存。
 
-#### 堆内存分配
+### 堆内存分配
 
 go对内存的组织是按照层级划分的：
 
@@ -505,15 +510,15 @@ go对内存的组织是按照层级划分的：
 
 ![go-memory-layout](/Users/xingzheng/Note/part-time Job/img/2020-02-29-15829868066479-go-memory-layout.png)
 
-#### 垃圾回收
+### 垃圾回收
 
 [参考答案](https://draveness.me/golang/docs/part3-runtime/ch07-memory/golang-garbage-collector/#标记清除)
 
 [GC20问](https://mp.weixin.qq.com/s/o2oMMh0PF5ZSoYD0XOBY2Q)
 
-##### 原理
+#### 原理
 
-###### 三色抽象
+##### 三色抽象
 
 - 白色对象 — 潜在的垃圾，其内存可能会被垃圾收集器回收；
 - 黑色对象 — 活跃的对象，包括不存在任何引用外部指针的对象以及从根对象可达的对象；
@@ -533,14 +538,14 @@ go对内存的组织是按照层级划分的：
 
 **本身并不支持并发**
 
-###### 三色不变性
+##### 三色不变性
 
 想要在并发或者增量的标记算法中保证正确性，我们需要达成以下两种三色不变性（Tri-color invariant）中的一种：
 
 - 强三色不变性 — 黑色对象不会指向白色对象，只会指向灰色对象或者黑色对象；
 - 弱三色不变性 — 黑色对象指向的白色对象必须包含一条从灰色对象经由多个白色对象的可达路径[7](https://draveness.me/golang/docs/part3-runtime/ch07-memory/golang-garbage-collector/#fn:7)；
 
-###### 写屏障
+##### 写屏障
 
 **Dijkstra写屏障 - 强三色不变性保证**
 
@@ -576,7 +581,7 @@ writePointer(slot, ptr):
 2. `shade(ptr)` prevents a mutator from hiding an object by moving the sole pointer to it from its stack into a black object in the heap. If it attempts to install the pointer into a black object, this will shade it.
 3. Once a goroutine's stack is black, the `shade(ptr)` becomes unnecessary. `shade(ptr)` prevents hiding an object by moving it from the stack to the heap, but this requires first having a pointer hidden on the stack. Immediately after a stack is scanned, it only points to shaded objects, so it's not hiding anything, and the `shade(*slot)` prevents it from hiding any other pointers on its stack.
 
-##### GC阶段
+#### GC阶段
 
 1. 清理终止阶段；
    1. **暂停程序**，所有的处理器在这时会进入安全点（Safe point）；
@@ -595,7 +600,7 @@ writePointer(slot, ptr):
    2. 恢复用户程序，所有新创建的对象会标记成白色；
    3. 后台并发清理所有的内存管理单元，当 Goroutine 申请新的内存管理单元时就会触发清理；
 
-##### GC的时机
+#### GC的时机
 
  [`runtime.gcTrigger.test`](https://draveness.me/golang/tree/runtime.gcTrigger.test) 方法决定是否需要触发垃圾收集
 
@@ -603,39 +608,41 @@ writePointer(slot, ptr):
 2. `gcTriggerTime` — 如果一定时间内没有触发，就会触发新的循环，该出发条件由 [`runtime.forcegcperiod`](https://draveness.me/golang/tree/runtime.forcegcperiod) 变量控制，默认为 2 分钟；
 3. `gcTriggerCycle` — 如果当前没有开启垃圾收集，则触发新的循环；
 
-#### 栈内存分配
+### 栈内存分配
 
 由分段栈变为连续栈，栈在运行时需要动态扩容和缩容
 
-### 性能调优
+## 性能调优
 
-#### pprof
+### pprof
 
-#### trace
+### trace
 
-### 标准库
+## 标准库
 
-#### math
+### math
 
-##### rand：
+#### rand：
 
 使用rand进行负载均衡的时候，如果多个go routine使用的是同一个随机数种子，那么生成的随机数是一样的。
 
+### sync
+
+#### map
+
+## 面经
+
+### channel的实现
 
 
-### 面经
 
-#### channel的实现
+### golang 的GMP模型
 
+### 线程和协程的堆栈的异同
 
+### GOROUTINE 的优势，它的轻量级体现在哪
 
-#### golang 的GMP模型
-
-#### 线程和协程的堆栈的异同
-
-#### GOROUTINE 的优势，它的轻量级体现在哪
-
-#### 如何理解“不要用共享内存来通信，要用通信来共享内存“
+### 如何理解“不要用共享内存来通信，要用通信来共享内存“
 
 [参考答案](https://draveness.me/whys-the-design-communication-shared-memory/)
 
@@ -648,25 +655,25 @@ writePointer(slot, ptr):
 - 使用消息来共享内存不会导致线程竞争的问题；
   - Go 语言选择消息发送的方式，通过保证同一时间只有一个活跃的线程能够访问数据，能够从设计上天然地避免线程竞争和数据冲突的问题；
 
-#### golang闭包
+### golang闭包
 
 
 
-### 框架
+## 框架
 
-#### 介绍一下gin框架并且与原生的net/http比较
+### 介绍一下gin框架并且与原生的net/http比较
 
 
 
-### 其他
+## 其他
 
-#### 为什么要选择GO
+### 为什么要选择GO
 
-#### Go的优缺点
+### Go的优缺点
 
-#### Go语言与C语言的优缺点
+### Go语言与C语言的优缺点
 
-#### 说一说docker如何映射端口的，docker网络模型
+
 
 
 
