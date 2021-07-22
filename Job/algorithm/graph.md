@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [图](#%E5%9B%BE)
+  - [图的存储（优点缺点）](#%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8%E4%BC%98%E7%82%B9%E7%BC%BA%E7%82%B9)
+    - [邻接矩阵](#%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B5)
+    - [邻接表](#%E9%82%BB%E6%8E%A5%E8%A1%A8)
+  - [图的遍历算法](#%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86%E7%AE%97%E6%B3%95)
+    - [狄杰斯特拉算法](#%E7%8B%84%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 <!--
  * @Author: xingzheng
  * @Date: 2021-07-18 23:41:53

@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [shell](#shell)
+  - [基本语法](#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95)
+    - [变量与运算符](#%E5%8F%98%E9%87%8F%E4%B8%8E%E8%BF%90%E7%AE%97%E7%AC%A6)
+    - [流程控制](#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6)
+    - [函数](#%E5%87%BD%E6%95%B0)
+    - [引入外部脚本](#%E5%BC%95%E5%85%A5%E5%A4%96%E9%83%A8%E8%84%9A%E6%9C%AC)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # shell
 
 ## 基本语法

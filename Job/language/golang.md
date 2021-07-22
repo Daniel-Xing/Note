@@ -1,6 +1,76 @@
-## Programming Language
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Golang](#golang)
+  - [基础](#%E5%9F%BA%E7%A1%80)
+    - [Array](#array)
+    - [Slice<sup>1</sup>](#slicesup1sup)
+      - [拷贝](#%E6%8B%B7%E8%B4%9D)
+      - [扩容](#%E6%89%A9%E5%AE%B9)
+    - [Hash表](#hash%E8%A1%A8)
+      - [golang 如何创建一个map](#golang-%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAmap)
+    - [String](#string)
+    - [函数](#%E5%87%BD%E6%95%B0)
+      - [闭包](#%E9%97%AD%E5%8C%85)
+    - [接口](#%E6%8E%A5%E5%8F%A3)
+    - [反射](#%E5%8F%8D%E5%B0%84)
+    - [for range](#for-range)
+    - [defer & panic & recover](#defer--panic--recover)
+    - [make & new](#make--new)
+  - [调度](#%E8%B0%83%E5%BA%A6)
+    - [Context](#context)
+    - [同步原语](#%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD)
+    - [channel](#channel)
+    - [GMP模型](#gmp%E6%A8%A1%E5%9E%8B)
+      - [原理](#%E5%8E%9F%E7%90%86)
+      - [触发调度的时机](#%E8%A7%A6%E5%8F%91%E8%B0%83%E5%BA%A6%E7%9A%84%E6%97%B6%E6%9C%BA)
+  - [内存分配](#%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D)
+    - [堆内存分配](#%E5%A0%86%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D)
+    - [垃圾回收(更新到1.8)](#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9B%B4%E6%96%B0%E5%88%B018)
+      - [原理](#%E5%8E%9F%E7%90%86-1)
+        - [三色抽象](#%E4%B8%89%E8%89%B2%E6%8A%BD%E8%B1%A1)
+        - [三色不变性](#%E4%B8%89%E8%89%B2%E4%B8%8D%E5%8F%98%E6%80%A7)
+        - [写屏障](#%E5%86%99%E5%B1%8F%E9%9A%9C)
+      - [GC阶段](#gc%E9%98%B6%E6%AE%B5)
+      - [GC的时机](#gc%E7%9A%84%E6%97%B6%E6%9C%BA)
+      - [GC 调优](#gc-%E8%B0%83%E4%BC%98)
+    - [栈内存分配](#%E6%A0%88%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D)
+  - [性能优化](#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96)
+    - [pprof](#pprof)
+    - [trace](#trace)
+      - [String & []Byte](#string--byte)
+        - [尽量避免[]byte 和 string相互转换](#%E5%B0%BD%E9%87%8F%E9%81%BF%E5%85%8Dbyte-%E5%92%8C-string%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2)
+        - [拼接](#%E6%8B%BC%E6%8E%A5)
+      - [map和syncMap](#map%E5%92%8Csyncmap)
+      - [正则化&JSON序列化](#%E6%AD%A3%E5%88%99%E5%8C%96json%E5%BA%8F%E5%88%97%E5%8C%96)
+  - [标准库](#%E6%A0%87%E5%87%86%E5%BA%93)
+    - [math](#math)
+      - [rand：](#rand)
+    - [sync](#sync)
+      - [map](#map)
+  - [面经](#%E9%9D%A2%E7%BB%8F)
+    - [channel的实现](#channel%E7%9A%84%E5%AE%9E%E7%8E%B0)
+    - [golang 的GMP模型](#golang-%E7%9A%84gmp%E6%A8%A1%E5%9E%8B)
+    - [线程和协程的堆栈的异同](#%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%8D%8F%E7%A8%8B%E7%9A%84%E5%A0%86%E6%A0%88%E7%9A%84%E5%BC%82%E5%90%8C)
+    - [GOROUTINE 的优势，它的轻量级体现在哪](#goroutine-%E7%9A%84%E4%BC%98%E5%8A%BF%E5%AE%83%E7%9A%84%E8%BD%BB%E9%87%8F%E7%BA%A7%E4%BD%93%E7%8E%B0%E5%9C%A8%E5%93%AA)
+    - [如何理解“不要用共享内存来通信，要用通信来共享内存“](#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E4%B8%8D%E8%A6%81%E7%94%A8%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E6%9D%A5%E9%80%9A%E4%BF%A1%E8%A6%81%E7%94%A8%E9%80%9A%E4%BF%A1%E6%9D%A5%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98)
+    - [golang闭包](#golang%E9%97%AD%E5%8C%85)
+  - [框架](#%E6%A1%86%E6%9E%B6)
+    - [介绍一下gin框架并且与原生的net/http比较](#%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8Bgin%E6%A1%86%E6%9E%B6%E5%B9%B6%E4%B8%94%E4%B8%8E%E5%8E%9F%E7%94%9F%E7%9A%84nethttp%E6%AF%94%E8%BE%83)
+  - [其他](#%E5%85%B6%E4%BB%96)
+    - [为什么要选择GO](#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E9%80%89%E6%8B%A9go)
+    - [Go的优缺点](#go%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9)
+    - [Go语言与C语言的优缺点](#go%E8%AF%AD%E8%A8%80%E4%B8%8Ec%E8%AF%AD%E8%A8%80%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9)
+    - [GDB调试](#gdb%E8%B0%83%E8%AF%95)
+    - [常用命令](#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4)
+  - [Reference](#reference)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # Golang
+
+
 
 ## 基础
 
@@ -652,7 +722,7 @@ Benchmark
 ```sh
 goos: darwin
 goarch: amd64
-pkg: code.byted.org/videoarch/play/tool_kit/optimize
+
 Benchmark_bytesToString    1000000000    0.262 ns/op     0 B/op    0 allocs/op
 Benchmark_toString         13166526      84.7 ns/op    512 B/op    1 allocs/op
 Benchmark_stringToBytes    1000000000    0.251 ns/op     0 B/op    0 allocs/op
@@ -759,7 +829,7 @@ func Benchmark_re2(b *testing.B) {
 /** benchmark **/
 goos: darwin
 goarch: amd64
-pkg: code.byted.org/videoarch/play/tool_kit/optimize
+
 Benchmark_re1     215503       5065 ns/op     5090 B/op     66 allocs/op
 Benchmark_re2     8692704       136 ns/op        0 B/op      0 allocs/op
 ```

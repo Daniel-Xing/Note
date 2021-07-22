@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [🌲树](#%E6%A0%91)
+  - [平衡二叉树](#%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91)
+  - [红黑树](#%E7%BA%A2%E9%BB%91%E6%A0%91)
+  - [红黑树和平衡二叉树](#%E7%BA%A2%E9%BB%91%E6%A0%91%E5%92%8C%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91)
+  - [B树&B+树](#b%E6%A0%91b%E6%A0%91)
+  - [跳表](#%E8%B7%B3%E8%A1%A8)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 <!--
  * @Author: xingzheng
  * @Date: 2021-07-18 23:41:41

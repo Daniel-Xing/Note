@@ -1,3 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [排序算法](#%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95)
+  - [冒泡排序](#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F)
+    - [优化方法（深度赋智面试）](#%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E6%B7%B1%E5%BA%A6%E8%B5%8B%E6%99%BA%E9%9D%A2%E8%AF%95)
+  - [归并排序](#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F)
+  - [快速排序](#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F)
+  - [堆排序](#%E5%A0%86%E6%8E%92%E5%BA%8F)
+  - [计数排序](#%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F)
+- [Leetcode](#leetcode)
+- [面经问题](#%E9%9D%A2%E7%BB%8F%E9%97%AE%E9%A2%98)
+  - [找出两个文件中相同的行，数据量小时和数据量大时分别怎么做？](#%E6%89%BE%E5%87%BA%E4%B8%A4%E4%B8%AA%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9B%B8%E5%90%8C%E7%9A%84%E8%A1%8C%E6%95%B0%E6%8D%AE%E9%87%8F%E5%B0%8F%E6%97%B6%E5%92%8C%E6%95%B0%E6%8D%AE%E9%87%8F%E5%A4%A7%E6%97%B6%E5%88%86%E5%88%AB%E6%80%8E%E4%B9%88%E5%81%9A)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 # 排序算法
 
