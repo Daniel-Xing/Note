@@ -178,7 +178,6 @@ func growslice(et *_type, old slice, cap int) slice {
 <summary><strong>如何实现栈和队列</strong></summary>
 1.  通过slice实现，入栈出栈可以使用切片来实现。但是有内存泄漏的风险
 2.  利用标准库里面的container/link（双向链表） 来实现，不保证线程安全
-
 container包中包含三个主要的东西，一个是heap 定义了一些接口，需要用户自己去实现，接口内部嵌入了sort包的中的接口。
 还有一个是link 双向链表，最后一个是ring
 </details>
@@ -191,7 +190,7 @@ container包中包含三个主要的东西，一个是heap 定义了一些接口
 
 **hash冲突的解决**
 
-- 拉链法：在数组中的下一个位置填充
+- 开放地址法：在数组中的下一个位置填充
   - Q：若填充位置阻碍了下一个hash怎么办？
 - 拉链法：用链表来存储冲突的元素
   - 装载因子 = 元素数量/桶的数量
@@ -418,7 +417,7 @@ type Context interface {
 
 [同步 - go语言设计与实现](https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-sync-primitives/)
 
-![golang-basic-sync-primitives](/Users/xingzheng/Note/part-time Job/img/2020-01-23-15797104327981-golang-basic-sync-primitives.png)
+![golang-basic-sync-primitives](../img/2020-01-23-15797104327981-golang-basic-sync-primitives.png)
 
 **Mutex - 互斥锁**
 
