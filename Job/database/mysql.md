@@ -59,7 +59,7 @@ Mysql只支持Nested Loop Join，不支持其他数据库提供的Hash Join & so
 
 通过redo log 来实现
 
-![image-20210411145824647](/Users/xingzheng/Note/part-time Job/img/image-20210411145824647.png)
+![image-20210411145824647](../img/image-20210411145824647.png)
 
 ##### 隔离性
 

@@ -361,11 +361,11 @@ Http协议定义了很多与服务器交互的方法，最基本的有4种，分
 
 - 接收到延迟的数据
 
-  ![image-20210410162856829](/Users/xingzheng/Note/part-time Job/img/image-20210410162856829.png)
+  ![image-20210410162856829](../img/image-20210410162856829.png)
 
 - 保证连接的正常关闭
 
-![image-20210410162943079](/Users/xingzheng/Note/part-time Job/img/image-20210410162943079.png)
+![image-20210410162943079](../img/image-20210410162943079.png)
 
 ##### time_wait的时间以及查看timeWait的命令
 
