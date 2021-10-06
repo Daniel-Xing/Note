@@ -1,0 +1,19 @@
+HOST ubuntu
+	HostName localhost
+	Port 9991
+	User xingzheng
+
+HOST ubuntuServer
+	HostName localhost
+	Port 9993
+	User xingzheng
+
+HOST aliyun
+	HostName 47.95.0.117
+	Port 22
+	User root
+
+Host tecent
+	HostName 1.116.147.145
+	Port 22
+	User ubuntu
