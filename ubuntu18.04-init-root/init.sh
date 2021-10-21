@@ -32,9 +32,9 @@ $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev
 
 sudo apt-get update -y
 sudo apt-get install docker-ce docker-ce-cli containerd.io -y
-sudo groupadd docker 
-sudo usermod -aG docker $USER
-newgrp docker 
+# sudo groupadd docker 
+# sudo usermod -aG docker $USER
+# newgrp docker 
 
 # install go
 echo "Installing go"
